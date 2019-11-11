@@ -82,7 +82,7 @@
         <!--Browse-->
         <scene sceneID="cj5-B2-Qgx">
             <objects>
-                <viewController id="XnY-F7-Hcj" sceneMemberID="viewController">
+                <viewController id="XnY-F7-Hcj" customClass="Browse" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d2s-HV-Jvz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
         <!--Post-->
         <scene sceneID="rk1-Iu-Xhr">
             <objects>
-                <viewController id="ZOt-jg-seP" sceneMemberID="viewController">
+                <viewController id="ZOt-jg-seP" customClass="Post" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u2k-TW-rjM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,17 +171,17 @@
             </objects>
             <point key="canvasLocation" x="-1335" y="1563"/>
         </scene>
-        <!--Transactions-->
+        <!--History-->
         <scene sceneID="fGV-Yq-KgZ">
             <objects>
-                <viewController id="1zT-pQ-ABC" sceneMemberID="viewController">
+                <viewController id="1zT-pQ-ABC" customClass="History" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IUJ-Yt-y03">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9ef-h9-QRB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Transactions" id="fMA-Lc-2HL"/>
+                    <navigationItem key="navigationItem" title="History" id="fMA-Lc-2HL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="niB-L5-S0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -207,7 +207,7 @@
         <!--Profile-->
         <scene sceneID="t7N-Kx-Jzj">
             <objects>
-                <viewController id="jyx-h3-Ghq" sceneMemberID="viewController">
+                <viewController id="jyx-h3-Ghq" customClass="Profile" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLa-74-hjE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,10 +246,10 @@
             </objects>
             <point key="canvasLocation" x="-389.85507246376812" y="2277.4553571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Listings-->
         <scene sceneID="8CM-Cf-DVQ">
             <objects>
-                <viewController id="I29-ji-QAX" sceneMemberID="viewController">
+                <viewController id="I29-ji-QAX" customClass="Listings" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPp-61-640">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -262,10 +262,10 @@
             </objects>
             <point key="canvasLocation" x="495" y="2282"/>
         </scene>
-        <!--View Controller-->
+        <!--Browse Details-->
         <scene sceneID="JIX-65-lAm">
             <objects>
-                <viewController id="Lj1-9s-Mb0" sceneMemberID="viewController">
+                <viewController id="Lj1-9s-Mb0" customClass="BrowseDetails" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I3H-Fg-m0y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
