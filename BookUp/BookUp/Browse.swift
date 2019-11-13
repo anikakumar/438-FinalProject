@@ -9,12 +9,22 @@
 import Foundation
 import UIKit
 
-class Browse: UIViewController {
+class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+    
+    @IBOutlet var search: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        search.delegate = self
         // Do any additional setup after loading the view.
     }
+    
+    func searchBarSearchButtonClicked(_ search: UISearchBar) {
+        if let searchText = search.text {
+            //do actional
+        }
+    }
+    
     //main parts:
     //Search bar
         //how to filter queries by isbn, course, title???
