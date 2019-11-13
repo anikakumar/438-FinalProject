@@ -16,6 +16,6 @@ class Listings: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //edit or delete your listings
 }
 

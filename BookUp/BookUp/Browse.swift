@@ -15,7 +15,17 @@ class Browse: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    //main parts:
+    //Search bar
+        //how to filter queries by isbn, course, title???
+    //UICollectionView or UITableView
+        //default is by recently added
+    //on click goes to detailed view
+    //cache images
+    //book titles
     
+    //optional:
+    //filtered search
     
 }
 

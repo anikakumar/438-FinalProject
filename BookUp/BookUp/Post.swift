@@ -16,6 +16,15 @@ class Post: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //submit form
+        //upload image
+        //title of book
+        //author
+        //course
+        //condition
+        //version/edition
+        //description/additional notes
+    //post button
+    //auto grabs seller id
 }
 

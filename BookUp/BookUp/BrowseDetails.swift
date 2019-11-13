@@ -16,6 +16,14 @@ class BrowseDetails: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //image
+    //title of book
+    //author
+    //course
+    //condition
+    //version/edition
+    //description/additional notes
+    //contact seller button
+    //isbn (maybe)
 }
 

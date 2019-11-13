@@ -16,6 +16,10 @@ class Profile: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //name
+    //email
+    //update button
+    //your listings
     
 }
 
