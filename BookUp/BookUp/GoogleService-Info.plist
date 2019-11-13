@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>868098505401-g0ie4dj6d1c0b723gfhciftc4lp8tolv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.868098505401-g0ie4dj6d1c0b723gfhciftc4lp8tolv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAD6-MFQHGqXVqsur_F6uqWMmpAIAU_CyM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>868098505401</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.anikakumar.BookUp</string>
+	<key>PROJECT_ID</key>
+	<string>bookup-253923</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bookup-253923.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:868098505401:ios:39cd675f290d2d43297968</string>
+	<key>DATABASE_URL</key>
+	<string>https://bookup-253923.firebaseio.com</string>
+</dict>
+</plist>
