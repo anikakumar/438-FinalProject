@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
@@ -24,6 +25,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
             //do actional
         }
     }
+    
+
     
     //main parts:
     //Search bar
