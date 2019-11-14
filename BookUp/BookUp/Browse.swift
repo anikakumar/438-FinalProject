@@ -67,6 +67,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     func grabFirebaseData() {
         let ref = Database.database().reference()
         ref.child("/Postings/").observe(.value, with: {
+        //ref.observe(.value, with: {
             snapshot in
             print("\(snapshot.key) -> \(String(describing: snapshot.value))")
             //our data is more complex than just a dict of string to string
