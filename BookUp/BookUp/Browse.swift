@@ -26,6 +26,7 @@ import FirebaseCore
 
 
 class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource {
+
     
     @IBOutlet var search: UISearchBar!
     
@@ -34,12 +35,12 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     var b: Book!
     override func viewDidLoad() {
         super.viewDidLoad()
-        search.delegate = self
-        tableView.register(Cell.self, forCellReuseIdentifier: "myBook")
+//        search.delegate = self
+//        tableView.register(Cell.self, forCellReuseIdentifier: "myBook")
         tableView.delegate = self
         tableView.dataSource = self
         grabFirebaseData()
-        tableView.reloadData()
+//        tableView.reloadData()
         // Do any additional setup after loading the view.
     }
 
@@ -50,15 +51,25 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
      }*/
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return bookResults.count
         //search - count
         //otherwise - 15 latest
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
-        cell.selectionStyle = .none
-        cell.label1.text = bookResults[indexPath.row].BookTitle
+        let cell:Cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
+        let imageURL = URL(string: bookResults[indexPath.row].Picture!)
+        let imageData = try? Data(contentsOf:imageURL!)
+        let image = UIImage(data: imageData!)!
+//        cell.imageV.image = image
+//        cell.label1.text = bookResults[indexPath.row].BookTitle
+//        cell.label2.text = bookResults[indexPath.row].Course
+//        cell.label3.text = bookResults[indexPath.row].Price
+        
+//        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course ?? "N/A", l3: bookResults[indexPath.row].Price ?? "N/A", id: indexPath.row)
+//        cell.textLabel!.text = bookResults[indexPath.row].BookTitle
+//        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -75,7 +86,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     do{
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                         self.bookResults.append(haha)
-                        //print(haha)
+//                        print(haha)
                     }
                     catch{
                         print("nooooooo")

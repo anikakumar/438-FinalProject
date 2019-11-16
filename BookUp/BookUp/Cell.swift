@@ -16,9 +16,9 @@ class Cell: UITableViewCell {
     @IBOutlet var label2: UILabel!
     @IBOutlet var label3: UILabel!
     var id: Int!
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     public func configure(i: UIImage, l1:String,l2:String,l3:String,id:Int){
         imageV.image = i

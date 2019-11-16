@@ -20,4 +20,5 @@ struct Book: Decodable {
     let Seller: String?
     let Version: String?
     //let Views: String?
+    let Picture: String?
 }
