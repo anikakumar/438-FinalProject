@@ -44,11 +44,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
      //do actional
      }
      }*/
-    
-    @IBAction func grabData(_ sender: Any) {
-        grabFirebaseData()
-    }
-    
+ 
     func grabFirebaseData() {
         let db = Firestore.firestore()
         
