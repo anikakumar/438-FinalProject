@@ -31,7 +31,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     
     @IBOutlet var tableView: UITableView!
     var bookResults: [Book] = []
-    
+    var b: Book!
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
@@ -69,11 +69,43 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
+                    var m =  document.data() as [String:AnyObject]
+                    m.removeValue(forKey: "DatePosted")
+                    let jsonData = try? JSONSerialization.data(withJSONObject:m)
+                    //print(type(of: jsonData))
+                    /*var messageDictionary = [String]()
+
+                    for (key, value) in m {
+                        messageDictionary.append("\(key) \(value)")
+                    }
+                    print(type(of: messageDictionary))*/
+                    /*let jsonData = try! JSONSerialization.data(withJSONObject: m)
+                    print(jsonData)*/
+                    do{
+                        let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
+                        print(haha)
+                    }
+                    catch{
+                        print("nooooooo")
+                    }
+                    //let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+                   // do{
+                   /*     let dict = jsonString.toJSON() as? [String:AnyObject] // can be any type here
+                    }
+                    catch{
+                        print("err")
+                    }*/
+                    //print("success")
+                    //let dataExample: Data = try NSKeyedArchiver.archivedData(withRootObject: document.data()) as Data
+                    //let jsonData = try JSONDecoder().decode(Book.self, from: dataExample)
+                    //print(jsonData.title)
+                    //let jsonString = String(data: jsonData, encoding: .utf8)
+                    //print(jsonString)
+                    //print(self.b.title ?? "DOESN'T WORK")
+//                    print("\(document.documentID) => \(document.data())")
+                    }
             }
         }
-        
     }
 }
 

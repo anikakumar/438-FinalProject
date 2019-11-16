@@ -9,15 +9,15 @@
 import Foundation
 
 struct Book: Decodable {
-    let title: String?
-    let author: String?
-    let comment: String?
-    let condition: String?
-    let course: String?
-    let price: Double?
+    let BookTitle: String!
+    let Author: String?
+    let Comments: String?
+    let Course: String?
+    let Price: String?
     let ISBN: String?
-    let image_path: String?
-    let seller: String?
-    let version: Double?
-    let views: Int?
+    //let DatePosted: Date?
+    let Condition: String?
+    let Seller: String?
+    let Version: String?
+    //let Views: String?
 }
