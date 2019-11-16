@@ -14,6 +14,7 @@
 		56A93ED72379DC5B00EEF0AC /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED62379DC5B00EEF0AC /* History.swift */; };
 		56A93ED92379DC7A00EEF0AC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED82379DC7A00EEF0AC /* Profile.swift */; };
 		56A93EDB2379DC8200EEF0AC /* Listings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93EDA2379DC8200EEF0AC /* Listings.swift */; };
+		56F11454237FF5FB00BFC77E /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F11453237FF5FB00BFC77E /* Cell.swift */; };
 		88F285BF237C9428006DA9A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88F285BE237C9428006DA9A4 /* GoogleService-Info.plist */; };
 		9276E8AA6515F2F9AE8E1E16 /* Pods_BookUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9921726A3266D69C90208A4E /* Pods_BookUp.framework */; };
 		D75E99C6237613FA00D7B457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75E99C5237613FA00D7B457 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 		56A93ED62379DC5B00EEF0AC /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		56A93ED82379DC7A00EEF0AC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		56A93EDA2379DC8200EEF0AC /* Listings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listings.swift; sourceTree = "<group>"; };
+		56F11453237FF5FB00BFC77E /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		5F8621A284D2864C713B17C9 /* Pods-BookUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookUp.debug.xcconfig"; path = "Target Support Files/Pods-BookUp/Pods-BookUp.debug.xcconfig"; sourceTree = "<group>"; };
 		88F285BE237C9428006DA9A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9921726A3266D69C90208A4E /* Pods_BookUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				56A93EDA2379DC8200EEF0AC /* Listings.swift */,
 				88F285BE237C9428006DA9A4 /* GoogleService-Info.plist */,
 				00C44143237F807A00A211F6 /* Book.swift */,
+				56F11453237FF5FB00BFC77E /* Cell.swift */,
 			);
 			path = BookUp;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */,
 				00C44144237F807A00A211F6 /* Book.swift in Sources */,
 				D75E99C6237613FA00D7B457 /* AppDelegate.swift in Sources */,
+				56F11454237FF5FB00BFC77E /* Cell.swift in Sources */,
 				56A93EDB2379DC8200EEF0AC /* Listings.swift in Sources */,
 				56A93ED52379DC4000EEF0AC /* Post.swift in Sources */,
 			);
