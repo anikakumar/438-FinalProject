@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
-import FirebaseDatabase
-
+import Firebase
+import FirebaseFirestore
+import FirebaseCore
 
 //main parts:
 //Search bar
@@ -55,32 +56,44 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     }
     
     /*func searchBarSearchButtonClicked(_ search: UISearchBar) {
-        if let searchText = search.text {
-            //do actional
-        }
-    }*/
+     if let searchText = search.text {
+     //do actional
+     }
+     }*/
     
     @IBAction func grabData(_ sender: Any) {
         grabFirebaseData()
     }
     
     func grabFirebaseData() {
-        let ref = Database.database().reference()
-        ref.child("/Postings/").observe(.value, with: {
-        //ref.observe(.value, with: {
-            snapshot in
-            print("\(snapshot.key) -> \(String(describing: snapshot.value))")
-            //our data is more complex than just a dict of string to string
-            let someData = snapshot.value! as! Dictionary<String, Book>
-            
-            for (_, value) in someData {
-                print("Value is \(value)")
-                //TODO UNCOMMENT
-                self.bookResults.append(value)
-                
+        let db = Firestore.firestore()
+        
+        //let ref = Database.database().reference()
+        //let ref = db.collection("/Postings/")
+        /*ref.observe(.value, with: {
+         snapshot in
+         print("\(snapshot.key) -> \(String(describing: snapshot.value))")
+         //our data is more complex than just a dict of string to string
+         let someData = snapshot.value! as! Dictionary<String, Book>
+         
+         for (_, value) in someData {
+         print("Value is \(value)")
+         //TODO UNCOMMENT
+         self.bookResults.append(value)
+         
+         }
+         self.tableView.reloadData()
+         })*/
+        db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
             }
-            self.tableView.reloadData()
-        })
+        }
+        
     }
 }
 

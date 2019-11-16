@@ -1,0 +1,6 @@
+framework module Pods_BookUp {
+  umbrella header "Pods-BookUp-umbrella.h"
+
+  export *
+  module * { export * }
+}
