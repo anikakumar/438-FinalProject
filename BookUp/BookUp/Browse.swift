@@ -32,22 +32,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     @IBOutlet var tableView: UITableView!
     var bookResults: [Book] = []
     
-    struct Book: Decodable {
-        let title: String?
-        let author: String?
-        let comment: String?
-        let condition: String?
-        let course: String?
-        let price: Double?
-        let ISBN: String?
-        let image_path: String?
-        let seller: String?
-        let version: Double?
-        let views: Int?
-        
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self

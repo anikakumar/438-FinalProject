@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/Lydia/Documents/WUSTL/Fall 2019/CSE 438S/438-FinalProject/BookUp/BookUp/Book.swift">
+   </FileRef>
+   <FileRef
       location = "group:BookUp.xcodeproj">
    </FileRef>
    <FileRef

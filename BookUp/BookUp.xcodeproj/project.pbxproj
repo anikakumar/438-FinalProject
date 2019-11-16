@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00C44140237F7EF800A211F6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4413F237F7EF800A211F6 /* Book.swift */; };
 		56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED02379DBFA00EEF0AC /* Browse.swift */; };
 		56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */; };
 		56A93ED52379DC4000EEF0AC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED42379DC4000EEF0AC /* Post.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00C4413F237F7EF800A211F6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Book.swift; path = "/Users/Lydia/Documents/WUSTL/Fall 2019/CSE 438S/438-FinalProject/BookUp/BookUp/Book.swift"; sourceTree = "<absolute>"; };
 		46D8B1E07B4B85B1726715C3 /* Pods-BookUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookUp.release.xcconfig"; path = "Target Support Files/Pods-BookUp/Pods-BookUp.release.xcconfig"; sourceTree = "<group>"; };
 		56A93ED02379DBFA00EEF0AC /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDetails.swift; sourceTree = "<group>"; };
@@ -60,7 +62,6 @@
 				5F8621A284D2864C713B17C9 /* Pods-BookUp.debug.xcconfig */,
 				46D8B1E07B4B85B1726715C3 /* Pods-BookUp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -93,6 +94,7 @@
 		D75E99C4237613FA00D7B457 /* BookUp */ = {
 			isa = PBXGroup;
 			children = (
+				00C4413F237F7EF800A211F6 /* Book.swift */,
 				D75E99C5237613FA00D7B457 /* AppDelegate.swift */,
 				D75E99C7237613FA00D7B457 /* ViewController.swift */,
 				D75E99C9237613FA00D7B457 /* Main.storyboard */,
@@ -231,6 +233,7 @@
 				56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */,
 				56A93ED92379DC7A00EEF0AC /* Profile.swift in Sources */,
 				56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */,
+				00C44140237F7EF800A211F6 /* Book.swift in Sources */,
 				D75E99C6237613FA00D7B457 /* AppDelegate.swift in Sources */,
 				56A93EDB2379DC8200EEF0AC /* Listings.swift in Sources */,
 				56A93ED52379DC4000EEF0AC /* Post.swift in Sources */,
