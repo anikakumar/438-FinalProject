@@ -25,7 +25,7 @@ import FirebaseCore
 //filtered search
 
 
-class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource {
     
     @IBOutlet var search: UISearchBar!
     
@@ -35,16 +35,33 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
+        tableView.register(Cell.self, forCellReuseIdentifier: "myBook")
+        tableView.delegate = self
+        tableView.dataSource = self
         grabFirebaseData()
+        tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-    
+
     /*func searchBarSearchButtonClicked(_ search: UISearchBar) {
      if let searchText = search.text {
      //do actional
      }
      }*/
  
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 15
+        //search - count
+        //otherwise - 15 latest
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
+        cell.selectionStyle = .none
+        cell.label1.text = bookResults[indexPath.row].BookTitle
+        return cell
+    }
+    
     func grabFirebaseData() {
         let db = Firestore.firestore()
         db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
@@ -65,8 +82,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     }
                 }
             }
-            print(self.bookResults.count)
-            print(self.bookResults[5].BookTitle as String)
+            //print(self.bookResults.count)
+            //print(self.bookResults[5].BookTitle as String)
         }
     }
 }
