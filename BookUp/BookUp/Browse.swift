@@ -33,14 +33,10 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:Cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
-       // let imageURL = URL(string: bookResults[indexPath.row].Picture!)
-        //let imageURL = URL(fileURLWithPath: "noImage.png")
-        //let imageData = try? Data(contentsOf:imageURL)
-        //let image = UIImage(data: imageData!)!
-        let image = UIImage(named: "noImage.png")!
-        print(bookResults[indexPath.row].BookTitle + " j")
-        print(bookResults[indexPath.row].Course + "j")
-        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: bookResults[indexPath.row].Price, id: indexPath.row)
+        let url = URL(string: bookResults[indexPath.row].Picture)
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)!
+        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + bookResults[indexPath.row].Price, id: indexPath.row)
         return cell
     }
     
@@ -59,7 +55,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         grabFirebaseData()
         self.tableView.isHidden = false
         self.tableView.reloadData()
-        //print(self.bookResults.count)
         // Do any additional setup after loading the view.
     }
 
@@ -77,35 +72,16 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.performSegue(withIdentifier: "myBook", sender: indexPath)
-       // guard let indexPath = sender as? IndexPath else { return }
         let detailVC = BrowseDetails()
-//        print(bookResults[indexPath.row].BookTitle)
-//        do {
-//        let title:String = bookResults[indexPath.row].BookTitle as String
-//            print(type(of: bookResults[indexPath.row].BookTitle))
-//        detailVC.name.text = bookResults[indexPath.row].BookTitle
-        print(bookResults[indexPath.row].BookTitle)
         detailVC.bt = bookResults[indexPath.row].BookTitle
-//            detailVC.name.text = title
-//        }
-//        else {
-//            let title:String = "not found"
-//            detailVC.name.text = title
-//        }
-        
-//        detailVC.book = bookResults[indexPath.row] as Book
-        /*if  let result = bookResults[indexPath.row]{
-         if let title = result.BookTitle {
-         detailVC.name.text = title
-         }
-         }*/
-            
-//        print(bookResults[indexPath.row])
-        
-        
-//        detailVC.name.text = bookResults[indexPath.row].BookTitle
-        //detailVC?.image = imageCache[indexPath.row] as UIImage
+        detailVC.a = bookResults[indexPath.row].Author
+        detailVC.s = bookResults[indexPath.row].Seller
+        detailVC.p = bookResults[indexPath.row].Price
+        detailVC.course = bookResults[indexPath.row].Course
+        let url = URL(string: bookResults[indexPath.row].Picture)
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)!
+        detailVC.bookpic = image
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
@@ -143,8 +119,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     }
                 }
             }
-            print(self.bookResults.count)
-//            print(self.bookResults[5].BookTitle as String)
             self.tableView.reloadData()
         }
     }

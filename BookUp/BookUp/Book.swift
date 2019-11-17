@@ -20,5 +20,5 @@ struct Book: Codable {
     var Seller: String
 //    let Version: String!
     //let Views: String?
-//    let Picture: String!
+    let Picture: String
 }

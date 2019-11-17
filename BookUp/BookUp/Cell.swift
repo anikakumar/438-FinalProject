@@ -18,7 +18,7 @@ class Cell: UITableViewCell {
     var id: Int!
   
     public func configure(i: UIImage, l1:String,l2:String,l3:String,id:Int){
-        //imageV.image = i
+        imageV.image = i
         //print(l1 + "l1")
         self.label1.text = l1
         self.label2.text = l2
