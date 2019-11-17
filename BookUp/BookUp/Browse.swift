@@ -38,9 +38,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         //let imageData = try? Data(contentsOf:imageURL)
         //let image = UIImage(data: imageData!)!
         let image = UIImage(named: "noImage.png")!
-        print(bookResults[indexPath.row].BookTitle! + " j")
-        print(bookResults[indexPath.row].Course ?? "0" + " j")
-        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle!, l2: bookResults[indexPath.row].Course ?? "N/A", l3: bookResults[indexPath.row].Price ?? "N/A", id: indexPath.row)
+        print(bookResults[indexPath.row].BookTitle + " j")
+        print(bookResults[indexPath.row].Course + "j")
+        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: bookResults[indexPath.row].Price, id: indexPath.row)
         return cell
     }
     
@@ -85,7 +85,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
 //        let title:String = bookResults[indexPath.row].BookTitle as String
 //            print(type(of: bookResults[indexPath.row].BookTitle))
 //        detailVC.name.text = bookResults[indexPath.row].BookTitle
-        detailVC.bt = bookResults[indexPath.row].BookTitle
+        print(bookResults[indexPath.row].BookTitle)
+//        detailVC.bt = bookResults[indexPath.row].BookTitle
 //            detailVC.name.text = title
 //        }
 //        else {
@@ -100,9 +101,10 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
          }
          }*/
             
+//        print(bookResults[indexPath.row])
         
         
-       // detailVC.name.text = bookResults[indexPath.row].BookTitle
+//        detailVC.name.text = bookResults[indexPath.row].BookTitle
         //detailVC?.image = imageCache[indexPath.row] as UIImage
         navigationController?.pushViewController(detailVC, animated: true)
         
@@ -134,15 +136,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     let jsonData = try? JSONSerialization.data(withJSONObject:m)
                     do{
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
-                        var thisBook:  Book! = Book() 
-                        //let a = haha.Author!
-                        print(type(of: thisBook.Author))
-//                        thisBook.Author = "author" as String
-//                        thisBook.BookTitle = "title" as String
-//                        thisBook.Course = "course" as String
-//                        thisBook.Price = "3" as String
-//                        thisBook.Seller = "me" as String
-//                        print(thisBook!)
                         self.bookResults.append(haha)
                     }
                     catch{

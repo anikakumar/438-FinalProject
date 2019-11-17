@@ -24,14 +24,14 @@ class BrowseDetails: UIViewController {
     @IBOutlet var name: UILabel!
     //var book: Book!
     
-    var bt: String?
+    var bt: String = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        name.text = bt
-        //print()
+//        name.text = bt
+        print("bt" + bt)
         
     }
 
