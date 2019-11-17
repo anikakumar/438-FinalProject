@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00C44144237F807A00A211F6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C44143237F807A00A211F6 /* Book.swift */; };
+		560B6AC9238125D80061FD15 /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 560B6AC8238125D80061FD15 /* noImage.png */; };
 		56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED02379DBFA00EEF0AC /* Browse.swift */; };
 		56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */; };
 		56A93ED52379DC4000EEF0AC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED42379DC4000EEF0AC /* Post.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		00C44143237F807A00A211F6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		46D8B1E07B4B85B1726715C3 /* Pods-BookUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookUp.release.xcconfig"; path = "Target Support Files/Pods-BookUp/Pods-BookUp.release.xcconfig"; sourceTree = "<group>"; };
+		560B6AC8238125D80061FD15 /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = SOURCE_ROOT; };
 		56A93ED02379DBFA00EEF0AC /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDetails.swift; sourceTree = "<group>"; };
 		56A93ED42379DC4000EEF0AC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				D75E99C7237613FA00D7B457 /* ViewController.swift */,
 				D75E99C9237613FA00D7B457 /* Main.storyboard */,
 				D75E99CC237613FC00D7B457 /* Assets.xcassets */,
+				560B6AC8238125D80061FD15 /* noImage.png */,
 				D75E99CE237613FC00D7B457 /* LaunchScreen.storyboard */,
 				D75E99D1237613FC00D7B457 /* Info.plist */,
 				56A93ED02379DBFA00EEF0AC /* Browse.swift */,
@@ -177,6 +180,7 @@
 			files = (
 				D75E99D0237613FC00D7B457 /* LaunchScreen.storyboard in Resources */,
 				88F285BF237C9428006DA9A4 /* GoogleService-Info.plist in Resources */,
+				560B6AC9238125D80061FD15 /* noImage.png in Resources */,
 				D75E99CD237613FC00D7B457 /* Assets.xcassets in Resources */,
 				D75E99CB237613FA00D7B457 /* Main.storyboard in Resources */,
 			);

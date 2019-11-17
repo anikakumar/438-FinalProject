@@ -16,15 +16,12 @@ class Cell: UITableViewCell {
     @IBOutlet var label2: UILabel!
     @IBOutlet var label3: UILabel!
     var id: Int!
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+  
     public func configure(i: UIImage, l1:String,l2:String,l3:String,id:Int){
-        imageV.image = i
-        label1.text = l1
-        label2.text = l2
-        label3.text = l3
-        self.id = id
+        //imageV.image = i
+        //print(l1 + "l1")
+        self.label1.text = l1
+        self.label2.text = l2
+        self.label3.text = l3
     }
 }
