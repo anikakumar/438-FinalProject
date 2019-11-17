@@ -86,7 +86,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
 //            print(type(of: bookResults[indexPath.row].BookTitle))
 //        detailVC.name.text = bookResults[indexPath.row].BookTitle
         print(bookResults[indexPath.row].BookTitle)
-//        detailVC.bt = bookResults[indexPath.row].BookTitle
+        detailVC.bt = bookResults[indexPath.row].BookTitle
 //            detailVC.name.text = title
 //        }
 //        else {

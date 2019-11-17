@@ -30,8 +30,8 @@ class BrowseDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        name.text = bt
-        print("bt" + bt)
+//        print("bt" + bt)
+        navigationItem.title = bt
         
     }
 
