@@ -21,6 +21,8 @@ class Login: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     
+    //https://www.iosapptemplates.com/blog/swift-programming/firebase-swift-tutorial-login-registration-ios
+    
     @IBAction func login(_ sender: UIButton) {
         let loginManager = Authentication()
         guard let email = username.text, let password = password.text else { return }
