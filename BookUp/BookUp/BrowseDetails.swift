@@ -80,16 +80,10 @@ class BrowseDetails: UIViewController {
     }
 
     @objc func contact() {
-        print("hiewfa")
         let alert = UIAlertController(title: "Success", message: "The seller has been notified via email about your interest in their listing", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }
-//    @objc func contact() {
-//        let alert = UIAlertController(title: "The seller has been notified via email about your interest in their listing.", message: nil, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//    }
-
 }

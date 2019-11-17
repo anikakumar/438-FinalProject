@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0086B7182381E26600B005B9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B7172381E26600B005B9 /* Login.swift */; };
+		0086B71C2381E53000B005B9 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B71B2381E53000B005B9 /* Authentication.swift */; };
 		00C44144237F807A00A211F6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C44143237F807A00A211F6 /* Book.swift */; };
 		560B6AC9238125D80061FD15 /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 560B6AC8238125D80061FD15 /* noImage.png */; };
 		56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED02379DBFA00EEF0AC /* Browse.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0086B7172381E26600B005B9 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0086B71B2381E53000B005B9 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		00C44143237F807A00A211F6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		46D8B1E07B4B85B1726715C3 /* Pods-BookUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookUp.release.xcconfig"; path = "Target Support Files/Pods-BookUp/Pods-BookUp.release.xcconfig"; sourceTree = "<group>"; };
 		560B6AC8238125D80061FD15 /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = SOURCE_ROOT; };
@@ -101,6 +105,8 @@
 				D75E99C5237613FA00D7B457 /* AppDelegate.swift */,
 				D75E99C7237613FA00D7B457 /* ViewController.swift */,
 				D75E99C9237613FA00D7B457 /* Main.storyboard */,
+				0086B71B2381E53000B005B9 /* Authentication.swift */,
+				0086B7172381E26600B005B9 /* Login.swift */,
 				D75E99CC237613FC00D7B457 /* Assets.xcassets */,
 				560B6AC8238125D80061FD15 /* noImage.png */,
 				D75E99CE237613FC00D7B457 /* LaunchScreen.storyboard */,
@@ -238,12 +244,14 @@
 				56A93ED72379DC5B00EEF0AC /* History.swift in Sources */,
 				D75E99C8237613FA00D7B457 /* ViewController.swift in Sources */,
 				56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */,
+				0086B71C2381E53000B005B9 /* Authentication.swift in Sources */,
 				56A93ED92379DC7A00EEF0AC /* Profile.swift in Sources */,
 				56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */,
 				00C44144237F807A00A211F6 /* Book.swift in Sources */,
 				D75E99C6237613FA00D7B457 /* AppDelegate.swift in Sources */,
 				56F11454237FF5FB00BFC77E /* Cell.swift in Sources */,
 				56A93EDB2379DC8200EEF0AC /* Listings.swift in Sources */,
+				0086B7182381E26600B005B9 /* Login.swift in Sources */,
 				56A93ED52379DC4000EEF0AC /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
