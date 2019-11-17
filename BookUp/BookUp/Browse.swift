@@ -38,9 +38,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         //let imageData = try? Data(contentsOf:imageURL)
         //let image = UIImage(data: imageData!)!
         let image = UIImage(named: "noImage.png")!
-        print(bookResults[indexPath.row].BookTitle + " j")
+        print(bookResults[indexPath.row].BookTitle! + " j")
         print(bookResults[indexPath.row].Course ?? "0" + " j")
-        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course ?? "N/A", l3: bookResults[indexPath.row].Price ?? "N/A", id: indexPath.row)
+        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle!, l2: bookResults[indexPath.row].Course ?? "N/A", l3: bookResults[indexPath.row].Price ?? "N/A", id: indexPath.row)
         return cell
     }
     
@@ -76,6 +76,52 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         return CGFloat(120)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "myBook", sender: indexPath)
+       // guard let indexPath = sender as? IndexPath else { return }
+        let detailVC = BrowseDetails()
+//        print(bookResults[indexPath.row].BookTitle)
+//        do {
+//        let title:String = bookResults[indexPath.row].BookTitle as String
+//            print(type(of: bookResults[indexPath.row].BookTitle))
+//        detailVC.name.text = bookResults[indexPath.row].BookTitle
+        detailVC.bt = bookResults[indexPath.row].BookTitle
+//            detailVC.name.text = title
+//        }
+//        else {
+//            let title:String = "not found"
+//            detailVC.name.text = title
+//        }
+        
+//        detailVC.book = bookResults[indexPath.row] as Book
+        /*if  let result = bookResults[indexPath.row]{
+         if let title = result.BookTitle {
+         detailVC.name.text = title
+         }
+         }*/
+            
+        
+        
+       // detailVC.name.text = bookResults[indexPath.row].BookTitle
+        //detailVC?.image = imageCache[indexPath.row] as UIImage
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
+    
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "myBook") {
+            guard let indexPath = sender as? IndexPath else { return }
+            let detailVC = segue.destination as? BrowseDetails
+            //detailVC?.name.text = bookResults[indexPath.row].BookTitle
+            detailVC?.book = bookResults[indexPath.row] as Book
+            //detailVC?.image = imageCache[indexPath.row] as UIImage
+        }
+    }*/
+    
     func grabFirebaseData() {
         let db = Firestore.firestore()
         db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
@@ -88,6 +134,15 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     let jsonData = try? JSONSerialization.data(withJSONObject:m)
                     do{
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
+                        var thisBook:  Book! = Book() 
+                        //let a = haha.Author!
+                        print(type(of: thisBook.Author))
+//                        thisBook.Author = "author" as String
+//                        thisBook.BookTitle = "title" as String
+//                        thisBook.Course = "course" as String
+//                        thisBook.Price = "3" as String
+//                        thisBook.Seller = "me" as String
+//                        print(thisBook!)
                         self.bookResults.append(haha)
                     }
                     catch{
@@ -96,7 +151,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
             print(self.bookResults.count)
-            print(self.bookResults[5].BookTitle as String)
+//            print(self.bookResults[5].BookTitle as String)
             self.tableView.reloadData()
         }
     }

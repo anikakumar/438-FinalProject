@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct Book: Decodable {
-    let BookTitle: String!
-    let Author: String?
-    let Comments: String?
-    let Course: String?
-    let Price: String?
-    let ISBN: String?
+struct Book: Codable {
+    var BookTitle: String!
+    var Author: String!
+//    let Comments: String!
+    var Course: String!
+    var Price: String!
+//    let ISBN: String!
     //let DatePosted: Date?
-    let Condition: String?
-    let Seller: String?
-    let Version: String?
+//    let Condition: String!
+    var Seller: String!
+//    let Version: String!
     //let Views: String?
-    let Picture: String?
+//    let Picture: String!
 }

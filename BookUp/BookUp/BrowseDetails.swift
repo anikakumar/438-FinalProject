@@ -22,14 +22,21 @@ class BrowseDetails: UIViewController {
     
     @IBOutlet var image: UIImageView!
     @IBOutlet var name: UILabel!
+    //var book: Book!
+    
+    var bt: String?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        name.text = bt
+        //print()
+        
     }
 
     @IBAction func contact(_ sender: Any) {
-        let alert = UIAlertController(title: "The seller has been notified via email abotu your interest in their listing.", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "The seller has been notified via email about your interest in their listing.", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     }
 }
