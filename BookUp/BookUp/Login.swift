@@ -22,6 +22,7 @@ class Login: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     //https://www.iosapptemplates.com/blog/swift-programming/firebase-swift-tutorial-login-registration-ios
+    //https://www.appcoda.com/firebase-login-signup/
     
     @IBAction func login(_ sender: UIButton) {
         //https://www.appcoda.com/firebase-login-signup/

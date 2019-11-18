@@ -25,6 +25,7 @@ class CreateAccount: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     
+      //https://www.appcoda.com/firebase-login-signup/
     @IBAction func create(_ sender: UIButton) {
         //this check doesn't work
         if firstName != nil, lastName != nil, username != nil, password != nil {
