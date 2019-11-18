@@ -47,6 +47,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     @IBOutlet var tableView: UITableView!
     var bookResults: [Book] = []
     var b: Book!
+    var everyBook: [Book] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
@@ -62,10 +63,25 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         tableView.reloadData()
     }*/
     
-    func searchBar(_ search: UISearchBar, textDidChange searchText: String) {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
-        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
+//    func searchBar(_ search: UISearchBar, textDidChange searchText: String) {
+//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
+//        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
+//    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        bookResults = []
+        if (searchBar.text! == ""){
+            bookResults = everyBook
+        } else {
+            for book in everyBook {
+                if book.BookTitle.lowercased().contains(searchBar.text!.lowercased()) || book.Author.lowercased().contains(searchBar.text!.lowercased()) || book.Course.lowercased().contains(searchBar.text!.lowercased()){
+                    bookResults.append(book)
+                }
+            }
+        }
+        print(bookResults)
+        self.tableView.reloadData()
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(120)
@@ -112,13 +128,14 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     let jsonData = try? JSONSerialization.data(withJSONObject:m)
                     do{
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
-                        self.bookResults.append(haha)
+                        self.everyBook.append(haha)
                     }
                     catch{
                         print("nooooooo")
                     }
                 }
             }
+            self.bookResults = self.everyBook
             self.tableView.reloadData()
         }
     }
