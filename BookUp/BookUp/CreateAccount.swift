@@ -27,8 +27,7 @@ class CreateAccount: UIViewController {
     
       //https://www.appcoda.com/firebase-login-signup/
     @IBAction func create(_ sender: UIButton) {
-        //this check doesn't work
-        if firstName != nil, lastName != nil, username != nil, password != nil {
+        if firstName.text != "", lastName.text != "", username.text != "", password.text != "" {
             guard let email = username.text, let password = password.text else { return }
             if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
                 print("e" + email)
@@ -54,6 +53,13 @@ class CreateAccount: UIViewController {
                     }
                 }
             }
+            else{
+                let alert = UIAlertController(title: "Failure to Create Account", message: "Please use a WashU email address.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         } else {
             let alert = UIAlertController(title: "Failure to Create Account", message: "One of the fields is left blank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -61,8 +67,6 @@ class CreateAccount: UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }
-        
-        
     }
     
     //https://www.back4app.com/docs/ios/swift-login-tutorial

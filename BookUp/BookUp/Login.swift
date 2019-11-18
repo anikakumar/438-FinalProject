@@ -27,7 +27,28 @@ class Login: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         //https://www.appcoda.com/firebase-login-signup/
         guard let email = username.text, let password = password.text else { return }
-        if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
+        if (email == "" && password == ""){
+            let alert = UIAlertController(title: "Failure to Login", message: "Email and password fields are blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if(email == ""){
+            let alert = UIAlertController(title: "Failure to Login", message: "Email field is blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if (password == ""){
+            let alert = UIAlertController(title: "Failure to Login", message: "Password field is blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if error == nil {
                     print("You have successfully logged in")
@@ -36,6 +57,13 @@ class Login: UIViewController {
                     print ("haha no")
                 }
             }
+        }
+        else{
+            let alert = UIAlertController(title: "Failure to Login", message: "Invalid credientials provided", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
