@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseCore
+import FirebaseAuth
 
 //main parts:
 //Search bar
@@ -26,6 +27,7 @@ import FirebaseCore
 
 
 class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource {
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookResults.count

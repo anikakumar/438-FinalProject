@@ -131,7 +131,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <action selector="create:" destination="1uA-sE-Qhz" eventType="touchUpInside" id="9iC-pp-06Z"/>
+                                    <action selector="create:" destination="OkQ-CW-jic" eventType="touchUpInside" id="ds1-gm-cMA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -139,12 +139,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="XEW-pl-8fn"/>
                     <connections>
+                        <outlet property="firstName" destination="G9p-1U-QAY" id="746-eD-WuH"/>
+                        <outlet property="lastName" destination="U6L-I7-F7T" id="MtD-I1-Am7"/>
                         <outlet property="password" destination="GV9-Bp-T94" id="2ea-gj-gBu"/>
                         <outlet property="username" destination="eiw-CC-hLu" id="Gzs-Zk-e0w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybF-b6-LTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="1uA-sE-Qhz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1304.3478260869567" y="142.63392857142856"/>
         </scene>

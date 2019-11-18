@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class Profile: UIViewController {
     
@@ -20,6 +21,7 @@ class Profile: UIViewController {
     //email
     //update button
     //your listings
+    
     
 }
 

@@ -8,57 +8,77 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
+import FirebaseFirestore
+import FirebaseCore
 
 class CreateAccount: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     
     @IBAction func create(_ sender: UIButton) {
-        let signUpManager = Authentication()
-        if let email = username.text, let password = password.text {
-            if let match = email.range(of: #"@wustl.edu"#, options: .regularExpression) {
-                print("wustl email: " + email)
-                print("password: " + password)
-                print("this would theoretically create an account")
-                //            signUpManager.createUser(email: email, password: password) {[weak self] (success) in
-                //                guard let `self` = self else { return }
-                //                var message: String = ""
-                //                if (success) {
-                //                    message = "User was sucessfully created."
-                //                } else {
-                //                    message = "There was an error."
-                //                }
-                //                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                //                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                //                self.alert(alertController: alertController)
+        //this check doesn't work
+        if firstName != nil, lastName != nil, username != nil, password != nil {
+            guard let email = username.text, let password = password.text else { return }
+            if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
+                print("e" + email)
+                print("p" + password)
+                Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                    if error == nil {
+                        print("You have successfully signed up")
+                        //write to the database First Name, Last Name, email, pic
+                        Firestore.firestore().collection("Users").document(String(email.dropLast(10))).setData([
+                            "FirstName": self.firstName.text!,
+                            "LastName": self.lastName.text!,
+                            "Email": email,
+                            "ProfilePic": "https://www.daarts.org/wp-content/uploads/2019/02/individual.png"
+                            ])
+                        self.loadHomeScreen()
+                    } else {
+                        let alert = UIAlertController(title: "Failure to Create Account", message: "Email is already associated with an account", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                            NSLog("The \"OK\" alert occured.")
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        self.username.text = ""
+                    }
+                }
             }
-            else {
-                print("email: " + email)
-                print("password: " + password)
-                let alert = UIAlertController(title: "Error", message: "The login you have entered is not valid", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
+        } else {
+            let alert = UIAlertController(title: "Failure to Create Account", message: "One of the fields is left blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
+        
+        
+    }
+    
+    //https://www.back4app.com/docs/ios/swift-login-tutorial
+    func loadHomeScreen(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Search") as! UITabBarController
+        self.present(loggedInViewController, animated: true, completion: nil)
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
