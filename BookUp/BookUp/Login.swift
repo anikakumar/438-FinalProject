@@ -54,7 +54,11 @@ class Login: UIViewController {
                     print("You have successfully logged in")
                     self.loadHomeScreen()
                 } else {
-                    print ("haha no")
+                    let alert = UIAlertController(title: "Failure to Login", message: "Invalid credientials provided", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
