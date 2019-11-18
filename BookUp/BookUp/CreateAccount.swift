@@ -16,7 +16,6 @@ class CreateAccount: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -24,44 +23,57 @@ class CreateAccount: UIViewController {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var verify: UITextField!
+
     
-      //https://www.appcoda.com/firebase-login-signup/
+    //https://www.appcoda.com/firebase-login-signup/
     @IBAction func create(_ sender: UIButton) {
-        if firstName.text != "", lastName.text != "", username.text != "", password.text != "" {
-            guard let email = username.text, let password = password.text else { return }
-            if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
-                print("e" + email)
-                print("p" + password)
-                Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-                    if error == nil {
-                        print("You have successfully signed up")
-                        //write to the database First Name, Last Name, email, pic
-                        Firestore.firestore().collection("Users").document(String(email.dropLast(10))).setData([
-                            "FirstName": self.firstName.text!,
-                            "LastName": self.lastName.text!,
-                            "Email": email,
-                            "ProfilePic": "https://www.daarts.org/wp-content/uploads/2019/02/individual.png"
-                            ])
-                        self.loadHomeScreen()
-                    } else {
-                        let alert = UIAlertController(title: "Failure to Create Account", message: "Email is already associated with an account", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                            NSLog("The \"OK\" alert occured.")
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                        self.username.text = ""
+        password.textContentType = UITextContentType(rawValue: "")
+        verify.textContentType = UITextContentType(rawValue: "")
+        if firstName.text != "", lastName.text != "", username.text != "", password.text != "", verify.text != "" {
+            if password.text == verify.text {
+                guard let email = username.text, let password = password.text else { return }
+                if email.range(of: #"@wustl.edu"#, options: .regularExpression) != nil {
+                    print("e" + email)
+                    print("p" + password)
+                    Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                        if error == nil {
+                            print("You have successfully signed up")
+                            //write to the database First Name, Last Name, email, pic
+                            Firestore.firestore().collection("Users").document(String(email.dropLast(10))).setData([
+                                "FirstName": self.firstName.text!,
+                                "LastName": self.lastName.text!,
+                                "Email": email,
+                                "ProfilePic": "https://www.daarts.org/wp-content/uploads/2019/02/individual.png"
+                                ])
+                            self.loadHomeScreen()
+                        } else {
+                            let alert = UIAlertController(title: "Failure to Create Account", message: "Email is already associated with an account", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                NSLog("The \"OK\" alert occured.")
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                            self.username.text = ""
+                        }
                     }
                 }
-            }
-            else{
-                let alert = UIAlertController(title: "Failure to Create Account", message: "Please use a WashU email address.", preferredStyle: .alert)
+                else{
+                    let alert = UIAlertController(title: "Failure to Create Account", message: "Please use a WashU email address.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                let alert = UIAlertController(title: "Failure to Create Account", message: "Passwords do not match.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
                 }))
                 self.present(alert, animated: true, completion: nil)
+                self.verify.text = ""
             }
         } else {
-            let alert = UIAlertController(title: "Failure to Create Account", message: "One of the fields is left blank", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Failure to Create Account", message: "At least one field is left blank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
             }))

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0084DE4623831E3F009C73A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084DE4523831E3F009C73A8 /* User.swift */; };
 		0086B7182381E26600B005B9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B7172381E26600B005B9 /* Login.swift */; };
 		0086B71C2381E53000B005B9 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B71B2381E53000B005B9 /* Authentication.swift */; };
 		0086B71E2381FCE600B005B9 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B71D2381FCE600B005B9 /* CreateAccount.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0084DE4523831E3F009C73A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0086B7172381E26600B005B9 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0086B71B2381E53000B005B9 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		0086B71D2381FCE600B005B9 /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				56A93ED42379DC4000EEF0AC /* Post.swift */,
 				56A93ED62379DC5B00EEF0AC /* History.swift */,
 				56A93ED82379DC7A00EEF0AC /* Profile.swift */,
+				0084DE4523831E3F009C73A8 /* User.swift */,
 				56A93EDA2379DC8200EEF0AC /* Listings.swift */,
 				88F285BE237C9428006DA9A4 /* GoogleService-Info.plist */,
 				00C44143237F807A00A211F6 /* Book.swift */,
@@ -250,6 +253,7 @@
 				0086B71C2381E53000B005B9 /* Authentication.swift in Sources */,
 				0086B71E2381FCE600B005B9 /* CreateAccount.swift in Sources */,
 				56A93ED92379DC7A00EEF0AC /* Profile.swift in Sources */,
+				0084DE4623831E3F009C73A8 /* User.swift in Sources */,
 				56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */,
 				00C44144237F807A00A211F6 /* Book.swift in Sources */,
 				D75E99C6237613FA00D7B457 /* AppDelegate.swift in Sources */,
