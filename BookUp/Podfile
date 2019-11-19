@@ -11,5 +11,6 @@ target 'BookUp' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
   
 end

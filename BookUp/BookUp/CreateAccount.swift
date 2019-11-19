@@ -17,6 +17,7 @@ class CreateAccount: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        signUpBtn.layer.cornerRadius = 15
     }
     
     @IBOutlet weak var firstName: UITextField!
@@ -25,6 +26,7 @@ class CreateAccount: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var verify: UITextField!
 
+    @IBOutlet weak var signUpBtn: UIButton!
     
     //https://www.appcoda.com/firebase-login-signup/
     @IBAction func create(_ sender: UIButton) {

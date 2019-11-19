@@ -11,16 +11,28 @@ import FirebaseAuth
 
 class Login: UIViewController {
     
+   
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         // Do any additional setup after loading the view.
+         loginBtn.layer.cornerRadius = 15
+       
     }
     
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+  
+   
+    @IBOutlet weak var loginBtn: UIButton!
+   
     
+   
     //https://www.iosapptemplates.com/blog/swift-programming/firebase-swift-tutorial-login-registration-ios
     //https://www.appcoda.com/firebase-login-signup/
     
