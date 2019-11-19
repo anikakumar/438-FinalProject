@@ -47,6 +47,7 @@ class CreateAccount: UIViewController {
                                 "LastName": self.lastName.text!,
                                 "Email": email,
                                 "ProfilePic": "https://www.daarts.org/wp-content/uploads/2019/02/individual.png"
+                                "RecentlyViewed": []
                                 ])
                             self.loadHomeScreen()
                         } else {
