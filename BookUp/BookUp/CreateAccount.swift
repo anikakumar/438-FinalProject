@@ -42,7 +42,7 @@ class CreateAccount: UIViewController {
                         if error == nil {
                             print("You have successfully signed up")
                             //write to the database First Name, Last Name, email, pic
-                            Firestore.firestore().collection("Users").document(String(email.dropLast(10))).setData([
+                            Firestore.firestore().collection("/Users/").document(String(email.dropLast(10))).setData([
                                 "FirstName": self.firstName.text!,
                                 "LastName": self.lastName.text!,
                                 "Email": email,

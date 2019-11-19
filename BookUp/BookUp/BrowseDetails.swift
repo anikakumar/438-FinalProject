@@ -44,25 +44,25 @@ class BrowseDetails: UIViewController {
         imageView.image = bookpic
         view.addSubview(imageView)
         
-        let authorFrame = CGRect(x: 0, y: 320, width: view.frame.width, height: 30)
+        let authorFrame = CGRect(x: 0, y: 550, width: view.frame.width, height: 30)
         let authorView = UILabel(frame: authorFrame)
         authorView.text = "Author: " + a
         authorView.textAlignment = .center
         view.addSubview(authorView)
         
-        let courseFrame = CGRect(x: 0, y: 360, width: view.frame.width, height: 30)
+        let courseFrame = CGRect(x: 0, y: 580, width: view.frame.width, height: 30)
         let courseView = UILabel(frame: courseFrame)
         courseView.text = "Course: " + course
         courseView.textAlignment = .center
         view.addSubview(courseView)
         
-        let priceFrame = CGRect(x: 0, y: 400, width: view.frame.width, height: 30)
+        let priceFrame = CGRect(x: 0, y: 610, width: view.frame.width, height: 30)
         let priceView = UILabel(frame: priceFrame)
         priceView.text = "Price: $" + p
         priceView.textAlignment = .center
         view.addSubview(priceView)
         
-        let sellerFrame = CGRect(x: 0, y: 440, width: view.frame.width, height: 30)
+        let sellerFrame = CGRect(x: 0, y: 640, width: view.frame.width, height: 30)
         let sellerView = UILabel(frame: sellerFrame)
         sellerView.text = "Seller: " + s
         sellerView.textAlignment = .center
