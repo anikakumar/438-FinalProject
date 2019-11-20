@@ -39,6 +39,16 @@ class Profile: UIViewController {
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let logInViewController = storyBoard.instantiateViewController(withIdentifier: "Login") as! UINavigationController
+            self.present(logInViewController, animated: true, completion: nil)
+            print("signed out")
+        }
+        catch{
+            print("didn't sign out")
+        }
     }
     
     override func viewDidLoad() {
