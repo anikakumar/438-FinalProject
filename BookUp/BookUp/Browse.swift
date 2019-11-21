@@ -96,6 +96,10 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         detailVC.s = bookResults[indexPath.row].Seller
         detailVC.p = bookResults[indexPath.row].Price
         detailVC.course = bookResults[indexPath.row].Course
+        detailVC.comm = bookResults[indexPath.row].Comments
+        detailVC.cond = bookResults[indexPath.row].Condition
+        detailVC.v = bookResults[indexPath.row].Version
+        detailVC.isbn = bookResults[indexPath.row].ISBN
         let url = URL(string: bookResults[indexPath.row].Picture)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
@@ -103,7 +107,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
-    
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

@@ -19,8 +19,27 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
         super.viewDidLoad()
     }
     
+    var emptyFields: [String] = []
+    var imageSet = false
+
     @IBOutlet weak var image1: UIImageView!
 
+    @IBOutlet var bookTitle: UITextField!
+    
+    @IBOutlet var course: UITextField!
+    
+    @IBOutlet var price: UITextField!
+    
+    @IBOutlet var author: UITextField!
+    
+    @IBOutlet var condition: UITextField!
+    
+    @IBOutlet var isbn: UITextField!
+    
+    @IBOutlet var version: UITextField!
+    
+    @IBOutlet var comments: UITextField!
+    
     //help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702
     @IBAction func uploadPhoto(_ sender: Any) {
         let alert = UIAlertController(title: "Ready to upload?", message: nil, preferredStyle: .alert)
@@ -44,12 +63,52 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
             fatalError("\(info)")
         }
         image1.image = selectedImage
+        imageSet = true
         dismiss(animated: true, completion: nil)
         let alert = UIAlertController(title: "Uploaded!", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler:nil))
         self.present(alert, animated :true)
     }
     
+    @IBAction func post(_ sender: Any) {
+        if bookTitle.text == ""{
+            emptyFields.append("Book Title")
+        }
+        if course.text == ""{
+            emptyFields.append("Course")
+        }
+        if price.text == ""{
+            emptyFields.append("Price")
+        }
+        if author.text == ""{
+            emptyFields.append("Author")
+        }
+        if condition.text == ""{
+            emptyFields.append("Condition")
+        }
+        if isbn.text == ""{
+            emptyFields.append("ISBN")
+        }
+        if (!imageSet){
+            emptyFields.append("Picture")
+        }
+        if (emptyFields.count != 0){
+            var message = ""
+            for field in emptyFields{
+                message = message + field + ", "
+            }
+            let index = message.index(message.endIndex, offsetBy: -2)
+            let message2 = String(message.prefix(upTo: index))
+            emptyFields = []
+            let alert = UIAlertController(title: "Empty Fields!", message: message2, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+
     //submit form
         //upload image
         //title of book

@@ -29,6 +29,10 @@ class BrowseDetails: UIViewController {
     var course: String = ""
     var p: String = ""
     var s: String = ""
+    var comm: String = ""
+    var cond: String = ""
+    var v: String = ""
+    var isbn: String = ""
     var bookpic: UIImage!
     
     override func viewDidLoad() {
@@ -56,19 +60,43 @@ class BrowseDetails: UIViewController {
         courseView.textAlignment = .center
         view.addSubview(courseView)
         
-        let priceFrame = CGRect(x: 0, y: 570, width: view.frame.width, height: 30)
+        let isbnFrame = CGRect(x: 0, y: 570, width: view.frame.width, height: 30)
+        let isbnView = UILabel(frame: isbnFrame)
+        isbnView.text = "ISBN: " + isbn
+        isbnView.textAlignment = .center
+        view.addSubview(isbnView)
+        
+        let versionFrame = CGRect(x: 0, y: 600, width: view.frame.width, height: 30)
+        let versionView = UILabel(frame: versionFrame)
+        versionView.text = "Version: " + v
+        versionView.textAlignment = .center
+        view.addSubview(versionView)
+        
+        let conditionFrame = CGRect(x: 0, y: 630, width: view.frame.width, height: 30)
+        let conditionView = UILabel(frame: conditionFrame)
+        conditionView.text = "Condition: " + cond
+        conditionView.textAlignment = .center
+        view.addSubview(conditionView)
+        
+        let commFrame = CGRect(x: 0, y: 660, width: view.frame.width, height: 30)
+        let commView = UILabel(frame: commFrame)
+        commView.text = "Comments: " + comm
+        commView.textAlignment = .center
+        view.addSubview(commView)
+        
+        let priceFrame = CGRect(x: 0, y: 690, width: view.frame.width, height: 30)
         let priceView = UILabel(frame: priceFrame)
         priceView.text = "Price: $" + p
         priceView.textAlignment = .center
         view.addSubview(priceView)
         
-        let sellerFrame = CGRect(x: 0, y: 600, width: view.frame.width, height: 30)
+        let sellerFrame = CGRect(x: 0, y: 720, width: view.frame.width, height: 30)
         let sellerView = UILabel(frame: sellerFrame)
         sellerView.text = "Seller: " + s
         sellerView.textAlignment = .center
         view.addSubview(sellerView)
         
-        let contactFrame = CGRect(x: view.frame.midX - 180, y: 700, width: 360, height: 30)
+        let contactFrame = CGRect(x: view.frame.midX - 180, y: 1000, width: 360, height: 30)
         let contactView = UIButton(frame: contactFrame)
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         if (username == s){

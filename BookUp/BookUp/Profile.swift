@@ -15,6 +15,7 @@ import FirebaseCore
 
 class Profile: UIViewController {
     
+    @IBOutlet var myBooks: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var firstName: UITextField!
