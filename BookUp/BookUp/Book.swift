@@ -13,7 +13,7 @@ struct Book: Codable {
     var Author: String
     var Comments: String
     var Course: String
-    var Price: String
+    var Price: Int
     let ISBN: String
     let Condition: String
     var Seller: String

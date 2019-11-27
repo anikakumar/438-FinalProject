@@ -82,10 +82,9 @@ class Login: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func createAccount(_ sender: UIButton) {
-        
+    @IBAction func forget(_ sender: UIButton) {
     }
+    
     
     //https://www.back4app.com/docs/ios/swift-login-tutorial
     func loadHomeScreen(){

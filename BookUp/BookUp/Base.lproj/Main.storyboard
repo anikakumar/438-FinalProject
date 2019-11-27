@@ -72,7 +72,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="WRm-Nb-t1x" eventType="touchUpInside" id="774-WI-CBx"/>
+                                    <action selector="forget:" destination="WRm-Nb-t1x" eventType="touchUpInside" id="ty3-8J-pIW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W8r-p2-YiT">
@@ -268,7 +268,7 @@
         <!--Search-->
         <scene sceneID="cj5-B2-Qgx">
             <objects>
-                <viewController id="XnY-F7-Hcj" customClass="Browse" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Browse" id="XnY-F7-Hcj" customClass="Browse" customModule="BookUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d2s-HV-Jvz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
