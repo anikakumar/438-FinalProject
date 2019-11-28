@@ -38,7 +38,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         let url = URL(string: bookResults[indexPath.row].Picture)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
-        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + bookResults[indexPath.row].Price, id: indexPath.row)
+        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + String(bookResults[indexPath.row].Price), id: indexPath.row)
         return cell
     }
     
@@ -84,6 +84,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         self.tableView.reloadData()
     }
     
+    @IBAction func refresh(_ sender: Any) {
+        grabFirebaseData()
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(120)
@@ -94,8 +97,12 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         detailVC.bt = bookResults[indexPath.row].BookTitle
         detailVC.a = bookResults[indexPath.row].Author
         detailVC.s = bookResults[indexPath.row].Seller
-        detailVC.p = bookResults[indexPath.row].Price
+        detailVC.p = String(bookResults[indexPath.row].Price)
         detailVC.course = bookResults[indexPath.row].Course
+        detailVC.comm = bookResults[indexPath.row].Comments
+        detailVC.cond = bookResults[indexPath.row].Condition
+        detailVC.v = bookResults[indexPath.row].Version
+        detailVC.isbn = bookResults[indexPath.row].ISBN
         let url = URL(string: bookResults[indexPath.row].Picture)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
@@ -103,7 +110,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
-    
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -133,11 +139,12 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                         self.everyBook.append(haha)
                     }
                     catch{
-                        print("nooooooo")
+                        print(error)
                     }
                 }
             }
             self.bookResults = self.everyBook
+//            print(self.bookResults)
             self.tableView.reloadData()
         }
     }

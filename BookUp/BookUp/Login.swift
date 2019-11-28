@@ -82,9 +82,26 @@ class Login: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    @IBAction func forget(_ sender: UIButton) {
+        if username.text == "" {
+            let alert = UIAlertController(title: "Email needed", message: "Type in your email above, then click Forgot Password", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            Auth.auth().sendPasswordReset(withEmail: username.text!) { (error) in
+                //...
+            }
+            let alert = UIAlertController(title: "Check your email", message: "Password reset instructions have been sent to your email", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
-    @IBAction func createAccount(_ sender: UIButton) {
-        
+    @IBAction func createAccount(_ sender: Any) {
     }
     
     //https://www.back4app.com/docs/ios/swift-login-tutorial

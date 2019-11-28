@@ -11,14 +11,13 @@ import Foundation
 struct Book: Codable {
     var BookTitle: String
     var Author: String
-//    let Comments: String!
+    var Comments: String
     var Course: String
-    var Price: String
-//    let ISBN: String!
-    //let DatePosted: Date?
-//    let Condition: String!
+    var Price: Int
+    let ISBN: String
+    let Condition: String
     var Seller: String
-//    let Version: String!
+    let Version: String
     //let Views: String?
     let Picture: String
 }
