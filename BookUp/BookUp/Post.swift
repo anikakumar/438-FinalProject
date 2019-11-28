@@ -44,6 +44,7 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
     
     @IBOutlet var comments: UITextField!
 
+    var imageURL: URL = URL(string: "www.google.com")!
     
     //help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702
     @IBAction func uploadPhoto(_ sender: Any) {
@@ -69,6 +70,19 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
         }
         image1.image = selectedImage
         imageSet = true
+        
+        let storageRef = Storage.storage().reference()
+        let imagesRef = storageRef.child("images")
+        let fileName = String(bookTitle.text! + String((Auth.auth().currentUser?.email?.dropLast(10))!)).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+        let fileRef = imagesRef.child(fileName)
+        fileRef.putData(selectedImage.pngData()!)
+        fileRef.downloadURL{ url, error in
+            if let error = error {
+                print(error)
+            } else {
+                self.imageURL = url!
+            }
+        }
         dismiss(animated: true, completion: nil)
         let alert = UIAlertController(title: "Uploaded!", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler:nil))
@@ -119,7 +133,7 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
                 "Course": course.text ?? "",
                 "DatePosted": Timestamp(date: Date()),
                 "ISBN": isbn.text!,
-                "Picture": "https://firebasestorage.googleapis.com/v0/b/bookup-253923.appspot.com/o/images%2Fphysics2.jpg?alt=media&token=7778b141-6f3d-4183-8160-426d14cf46cc", //this needs to be fixed
+                "Picture": imageURL,
                 "Price": Int(price.text!)!,
                 "Seller": String((Auth.auth().currentUser?.email?.dropLast(10))!),
                 "Version": version.text!,

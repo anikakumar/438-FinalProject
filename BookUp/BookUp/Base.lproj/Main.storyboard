@@ -41,7 +41,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="createAccount:" destination="WRm-Nb-t1x" eventType="touchUpInside" id="J3T-nn-ddz"/>
+                                    <action selector="createAccount:" destination="WRm-Nb-t1x" eventType="touchUpInside" id="fOC-xk-ERL"/>
                                     <segue destination="OkQ-CW-jic" kind="push" identifier="create" id="3EF-Wh-QWN"/>
                                 </connections>
                             </button>
@@ -329,7 +329,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="nev-9i-uon"/>
+                    <navigationItem key="navigationItem" title="Search" id="nev-9i-uon">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="rcz-qM-ob1">
+                            <connections>
+                                <action selector="refresh:" destination="XnY-F7-Hcj" id="lpm-fX-6aA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="search" destination="nTr-si-XdT" id="X8m-E8-X7X"/>
                         <outlet property="tableView" destination="aKh-qH-SN0" id="iyP-Ln-yjc"/>

@@ -84,6 +84,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         self.tableView.reloadData()
     }
     
+    @IBAction func refresh(_ sender: Any) {
+        grabFirebaseData()
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(120)
@@ -141,6 +144,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
             self.bookResults = self.everyBook
+//            print(self.bookResults)
             self.tableView.reloadData()
         }
     }
