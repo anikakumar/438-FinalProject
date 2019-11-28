@@ -13,7 +13,46 @@ import Firebase
 import FirebaseFirestore
 import FirebaseCore
 
-class Profile: UIViewController {
+class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var myPosts: [Book] = []
+    
+    func grabBookData() {
+        let db = Firestore.firestore()
+        db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    var m =  document.data() as [String:AnyObject]
+                    m.removeValue(forKey: "DatePosted")
+                    let jsonData = try? JSONSerialization.data(withJSONObject:m)
+                    do{
+                        let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
+                        if haha.Seller == self.username {
+                            self.myPosts.append(haha)
+                        }
+                    }
+                    catch{
+                        print(error)
+                    }
+                }
+            }
+            print(self.myPosts.count)
+            self.myBooks.reloadData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myPosts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myPostings", for: indexPath)
+        cell.backgroundColor = UIColor.black
+        return cell
+    }
+    
     
     @IBOutlet var myBooks: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -56,6 +95,7 @@ class Profile: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         grabFirebaseData()
+        grabBookData()
     }
     
     func grabFirebaseData() {
