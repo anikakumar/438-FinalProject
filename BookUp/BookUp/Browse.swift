@@ -50,6 +50,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     var bookResults: [Book] = []
     var b: Book!
     var everyBook: [Book] = []
+    var idToBook: [String: Book] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
@@ -92,6 +94,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         return CGFloat(120)
     }
     
+    var recents: [String] = []
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = BrowseDetails()
         detailVC.bt = bookResults[indexPath.row].BookTitle
@@ -107,6 +111,21 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
         detailVC.bookpic = image
+        
+        var idToAppend: String = ""
+        for (bookID, bookObj) in idToBook {
+            if bookObj == bookResults[indexPath.row] {
+                idToAppend = bookID
+            }
+        }
+        /*
+        let db = Firestore.firestore()
+        let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
+        grabFirebaseDataRecentlyViewed()
+        db.collection("/Users/").document(username).updateData([
+            "RecentlyViewed" : recents.append(idToAppend)
+            ])/
+         */
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
@@ -124,6 +143,25 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         }
     }*/
     
+    func grabFirebaseDataRecentlyViewed(){
+        let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
+        Firestore.firestore().collection("/Users/").document(username).getDocument { (document, error) in
+            if let document = document, document.exists{
+                let data = document.data()
+                //                    .map(String.init(describing:)) ?? "nil"
+                do {
+                    let jsonData = try? JSONSerialization.data(withJSONObject: data!)
+                    let user = try JSONDecoder().decode(User.self, from: jsonData!)
+                    self.recents = user.RecentlyViewed
+                    print("set recently viewed")
+                } catch {
+                    print ("something went wrong")
+
+                }
+            }
+        }
+    }
+    
     func grabFirebaseData() {
         let db = Firestore.firestore()
         db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
@@ -137,6 +175,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     do{
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                         self.everyBook.append(haha)
+                        self.idToBook[document.documentID] = haha
                     }
                     catch{
                         print(error)

@@ -14,22 +14,33 @@ import FirebaseFirestore
 import FirebaseCore
 
 class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var recents: [String] = []
+    var recentBooks: [Book] = []
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath)
+        let cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath) as! Cell
+
+        let url = URL(string: recentBooks[indexPath.row].Picture)
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)!
+        cell.configure(i: image, l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
         return cell
+        
     }
     
-    var recents: [String] = []
-    var recentBooks: [Book] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print("entered history view did load")
         grabFirebaseData()
+        self.recent.reloadData()
     }
     
     //books sold
@@ -49,18 +60,50 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
                     self.recents = user.RecentlyViewed
-                    self.grabBookData()
+                    self.grabFirebaseDataPosts()
                 } catch {
                     print ("something went wrong")
                 }
             }
         }
+        self.recent.reloadData()
+    }
+    
+    func grabFirebaseDataPosts() {
+        let db = Firestore.firestore()
+        db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                print("------HISTORY--------")
+                for document in querySnapshot!.documents {
+                    var m =  document.data() as [String:AnyObject]
+                    m.removeValue(forKey: "DatePosted")
+                    let jsonData = try? JSONSerialization.data(withJSONObject:m)
+                    do{
+                        if self.recents.contains(document.documentID) {
+                            print(document.documentID)
+                            let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
+                            self.recentBooks.append(haha)
+                        }
+                    }
+                    catch{
+                        print(error)
+                    }
+                }
+                print("------HISTORY OVER--------")
+            }
+            //            print(self.bookResults)
+            self.recent.reloadData()
+        }
     }
     
     func grabBookData() {
+        print("------HISTORY--------")
         for r in recents {
            print(r)
         }
+        print("------HISTORY OVER--------")
     }
 }
 
