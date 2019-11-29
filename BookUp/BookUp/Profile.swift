@@ -73,7 +73,6 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         lastName.isUserInteractionEnabled = !lastName.isUserInteractionEnabled
         editButton.title = (firstName.isUserInteractionEnabled) ? "Save" : "Edit"
         if editButton.title == "Edit" {
-            //                if firstName.text != nil && lastName.text != nil {
             print("write to database")
             db.collection("/Users/").document(username).updateData([
                 "FirstName" : firstName.text!,
@@ -102,6 +101,11 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         myBooks.dataSource = self
         grabFirebaseData()
         grabBookData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myBooks.reloadData()
     }
     
     func grabFirebaseData() {

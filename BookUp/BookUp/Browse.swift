@@ -42,7 +42,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         return cell
     }
     
-
+    
     
     @IBOutlet var search: UISearchBar!
     
@@ -58,19 +58,21 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         tableView.delegate = self
         tableView.dataSource = self
         grabFirebaseData()
-        self.tableView.isHidden = false
-        self.tableView.reloadData()
+//        self.tableView.isHidden = false
+//        self.tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-
-    /*override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }*/
     
-//    func searchBar(_ search: UISearchBar, textDidChange searchText: String) {
-//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
-//        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bookResults.removeAll()
+        searchBarSearchButtonClicked(search)
+    }
+    
+    //    func searchBar(_ search: UISearchBar, textDidChange searchText: String) {
+    //        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
+    //        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
+    //    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         bookResults = []
         if (searchBar.text! == ""){
@@ -96,53 +98,77 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     }
     
     var recents: [String] = []
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = BrowseDetails()
-        detailVC.bt = bookResults[indexPath.row].BookTitle
-        detailVC.a = bookResults[indexPath.row].Author
-        detailVC.s = bookResults[indexPath.row].Seller
-        detailVC.p = String(bookResults[indexPath.row].Price)
-        detailVC.course = bookResults[indexPath.row].Course
-        detailVC.comm = bookResults[indexPath.row].Comments
-        detailVC.cond = bookResults[indexPath.row].Condition
-        detailVC.v = bookResults[indexPath.row].Version
-        detailVC.isbn = bookResults[indexPath.row].ISBN
-        let url = URL(string: bookResults[indexPath.row].Picture)
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)!
-        detailVC.bookpic = image
-        
-        var idToAppend: String = ""
-        for (bookID, bookObj) in idToBook {
-            if bookObj == bookResults[indexPath.row] {
-                idToAppend = bookID
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let detailVC = segue.destination as! BrowseDetails
+                detailVC.bt = bookResults[indexPath.row].BookTitle
+                detailVC.a = bookResults[indexPath.row].Author
+                detailVC.s = bookResults[indexPath.row].Seller
+                detailVC.p = String(bookResults[indexPath.row].Price)
+                detailVC.course = bookResults[indexPath.row].Course
+                detailVC.comm = bookResults[indexPath.row].Comments
+                detailVC.cond = bookResults[indexPath.row].Condition
+                detailVC.v = bookResults[indexPath.row].Version
+                detailVC.isbn = bookResults[indexPath.row].ISBN
+                let url = URL(string: bookResults[indexPath.row].Picture)
+                let data = try? Data(contentsOf: url!)
+                let image = UIImage(data: data!)!
+                detailVC.bookpic = image
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+        
+        //        let detailVC = BrowseDetails()
+        //        detailVC.bt = bookResults[indexPath.row].BookTitle
+        //        detailVC.a = bookResults[indexPath.row].Author
+        //        detailVC.s = bookResults[indexPath.row].Seller
+        //        detailVC.p = String(bookResults[indexPath.row].Price)
+        //        detailVC.course = bookResults[indexPath.row].Course
+        //        detailVC.comm = bookResults[indexPath.row].Comments
+        //        detailVC.cond = bookResults[indexPath.row].Condition
+        //        detailVC.v = bookResults[indexPath.row].Version
+        //        detailVC.isbn = bookResults[indexPath.row].ISBN
+        //        let url = URL(string: bookResults[indexPath.row].Picture)
+        //        let data = try? Data(contentsOf: url!)
+        //        let image = UIImage(data: data!)!
+        //        detailVC.bookpic = image
+        //
+        //        var idToAppend: String = ""
+        //        for (bookID, bookObj) in idToBook {
+        //            if bookObj == bookResults[indexPath.row] {
+        //                idToAppend = bookID
+        //            }
+        //        }
         /*
-        let db = Firestore.firestore()
-        let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
-        grabFirebaseDataRecentlyViewed()
-        db.collection("/Users/").document(username).updateData([
-            "RecentlyViewed" : recents.append(idToAppend)
-            ])/
+         let db = Firestore.firestore()
+         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
+         grabFirebaseDataRecentlyViewed()
+         db.collection("/Users/").document(username).updateData([
+         "RecentlyViewed" : recents.append(idToAppend)
+         ])/
          */
-        navigationController?.pushViewController(detailVC, animated: true)
+        //        navigationController?.pushViewController(detailVC, animated: true)
         
     }
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        
-        if(segue.identifier == "myBook") {
-            guard let indexPath = sender as? IndexPath else { return }
-            let detailVC = segue.destination as? BrowseDetails
-            //detailVC?.name.text = bookResults[indexPath.row].BookTitle
-            detailVC?.book = bookResults[indexPath.row] as Book
-            //detailVC?.image = imageCache[indexPath.row] as UIImage
-        }
-    }*/
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     
+     if(segue.identifier == "myBook") {
+     guard let indexPath = sender as? IndexPath else { return }
+     let detailVC = segue.destination as? BrowseDetails
+     //detailVC?.name.text = bookResults[indexPath.row].BookTitle
+     detailVC?.book = bookResults[indexPath.row] as Book
+     //detailVC?.image = imageCache[indexPath.row] as UIImage
+     }
+     }*/
     
     func grabFirebaseDataRecentlyViewed(){
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
@@ -157,7 +183,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     print("set recently viewed")
                 } catch {
                     print ("something went wrong")
-
+                    
                 }
             }
         }
@@ -184,7 +210,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
             self.bookResults = self.everyBook
-//            print(self.bookResults)
+            //            print(self.bookResults)
             self.tableView.reloadData()
         }
     }

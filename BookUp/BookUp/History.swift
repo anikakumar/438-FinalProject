@@ -68,6 +68,11 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.recent.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recent.reloadData()
+    }
+    
     //books sold
     //books listed
     //contacted by
