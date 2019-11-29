@@ -87,7 +87,8 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     }
     
     @IBAction func refresh(_ sender: Any) {
-        grabFirebaseData()
+        bookResults.removeAll()
+        searchBarSearchButtonClicked(search)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

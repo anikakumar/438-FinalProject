@@ -23,7 +23,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath) as! Cell
+        let cell:Cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath) as! Cell
 
         let url = URL(string: recentBooks[indexPath.row].Picture)
         let data = try? Data(contentsOf: url!)
@@ -33,6 +33,10 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(120)
+    }
 
     
     override func viewDidLoad() {
@@ -55,7 +59,6 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         Firestore.firestore().collection("/Users/").document(username).getDocument { (document, error) in
             if let document = document, document.exists{
                 let data = document.data()
-                //                    .map(String.init(describing:)) ?? "nil"
                 do {
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
@@ -82,7 +85,6 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     let jsonData = try? JSONSerialization.data(withJSONObject:m)
                     do{
                         if self.recents.contains(document.documentID) {
-                            print(document.documentID)
                             let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                             self.recentBooks.append(haha)
                         }
@@ -97,13 +99,13 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.recent.reloadData()
         }
     }
-    
-    func grabBookData() {
-        print("------HISTORY--------")
-        for r in recents {
-           print(r)
-        }
-        print("------HISTORY OVER--------")
-    }
+//
+//    func grabBookData() {
+//        print("------HISTORY--------")
+//        for r in recents {
+//           print(r)
+//        }
+//        print("------HISTORY OVER--------")
+//    }
 }
 

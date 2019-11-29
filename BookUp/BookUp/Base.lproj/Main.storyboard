@@ -703,6 +703,9 @@
                                 <rect key="frame" x="168" y="716" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Delete "/>
+                                <connections>
+                                    <action selector="deleteListing:" destination="I29-ji-QAX" eventType="touchUpInside" id="0sd-g5-2fM"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" id="jTX-ZM-qV4">
                                 <rect key="frame" x="0.0" y="88" width="414" height="92"/>

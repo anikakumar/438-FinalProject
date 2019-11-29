@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseCore
+import FirebaseAuth
 
 class Listings: UIViewController {
     
@@ -17,5 +21,8 @@ class Listings: UIViewController {
     }
     
     //edit or delete your listings
+    @IBAction func deleteListing(_ sender: Any) {
+
+    }
 }
 
