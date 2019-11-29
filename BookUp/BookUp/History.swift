@@ -29,6 +29,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
         cell.configure(i: image, l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
+        print(recentBooks)
         return cell
         
     }
@@ -37,13 +38,33 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(120)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = BrowseDetails()
+        detailVC.bt = recentBooks[indexPath.row].BookTitle
+        detailVC.a = recentBooks[indexPath.row].Author
+        detailVC.s = recentBooks[indexPath.row].Seller
+        detailVC.p = String(recentBooks[indexPath.row].Price)
+        detailVC.course = recentBooks[indexPath.row].Course
+        detailVC.comm = recentBooks[indexPath.row].Comments
+        detailVC.cond = recentBooks[indexPath.row].Condition
+        detailVC.v = recentBooks[indexPath.row].Version
+        detailVC.isbn = recentBooks[indexPath.row].ISBN
+        let url = URL(string: recentBooks[indexPath.row].Picture)
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)!
+        detailVC.bookpic = image
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("entered history view did load")
+        recent.delegate = self
+        recent.dataSource = self
         grabFirebaseData()
+        self.recent.isHidden = false
         self.recent.reloadData()
     }
     
