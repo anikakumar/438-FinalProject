@@ -13,6 +13,7 @@
 		0086B71E2381FCE600B005B9 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B71D2381FCE600B005B9 /* CreateAccount.swift */; };
 		00C44144237F807A00A211F6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C44143237F807A00A211F6 /* Book.swift */; };
 		560B6AC9238125D80061FD15 /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 560B6AC8238125D80061FD15 /* noImage.png */; };
+		566B90892390BDF10070606F /* Cell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B90882390BDF10070606F /* Cell2.swift */; };
 		56A93ED12379DBFA00EEF0AC /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED02379DBFA00EEF0AC /* Browse.swift */; };
 		56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */; };
 		56A93ED52379DC4000EEF0AC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A93ED42379DC4000EEF0AC /* Post.swift */; };
@@ -37,6 +38,7 @@
 		00C44143237F807A00A211F6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		46D8B1E07B4B85B1726715C3 /* Pods-BookUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookUp.release.xcconfig"; path = "Target Support Files/Pods-BookUp/Pods-BookUp.release.xcconfig"; sourceTree = "<group>"; };
 		560B6AC8238125D80061FD15 /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = SOURCE_ROOT; };
+		566B90882390BDF10070606F /* Cell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell2.swift; sourceTree = "<group>"; };
 		56A93ED02379DBFA00EEF0AC /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		56A93ED22379DC3100EEF0AC /* BrowseDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDetails.swift; sourceTree = "<group>"; };
 		56A93ED42379DC4000EEF0AC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		D75E99C4237613FA00D7B457 /* BookUp */ = {
 			isa = PBXGroup;
 			children = (
+				566B90882390BDF10070606F /* Cell2.swift */,
 				D75E99C5237613FA00D7B457 /* AppDelegate.swift */,
 				D75E99C7237613FA00D7B457 /* ViewController.swift */,
 				D75E99C9237613FA00D7B457 /* Main.storyboard */,
@@ -253,6 +256,7 @@
 				0086B71C2381E53000B005B9 /* Authentication.swift in Sources */,
 				0086B71E2381FCE600B005B9 /* CreateAccount.swift in Sources */,
 				56A93ED92379DC7A00EEF0AC /* Profile.swift in Sources */,
+				566B90892390BDF10070606F /* Cell2.swift in Sources */,
 				0084DE4623831E3F009C73A8 /* User.swift in Sources */,
 				56A93ED32379DC3100EEF0AC /* BrowseDetails.swift in Sources */,
 				00C44144237F807A00A211F6 /* Book.swift in Sources */,
@@ -408,6 +412,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYS6TYQ389;
 				INFOPLIST_FILE = BookUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -426,6 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYS6TYQ389;
 				INFOPLIST_FILE = BookUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

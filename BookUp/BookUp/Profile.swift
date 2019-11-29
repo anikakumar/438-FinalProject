@@ -48,8 +48,13 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myPostings", for: indexPath)
-        cell.backgroundColor = UIColor.black
+        let cell:Cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "myPostings", for: indexPath) as! Cell2
+        //cell.backgroundColor = UIColor.black
+        let url = URL(string: myPosts[indexPath.row].Picture)
+        let data = try? Data(contentsOf: url!)
+        let image = UIImage(data: data!)!
+        print(myPosts[indexPath.row].BookTitle)
+        cell.configure(i: image, l: myPosts[indexPath.row].BookTitle)
         return cell
     }
     
@@ -93,6 +98,8 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        myBooks.delegate = self
+        myBooks.dataSource = self
         grabFirebaseData()
         grabBookData()
     }
