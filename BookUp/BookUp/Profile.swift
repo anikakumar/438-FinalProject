@@ -62,7 +62,6 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var image: UIImageView!
     let db = Firestore.firestore()
     var username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
-//    var thisUser: User = User(ProfilePic: "", Email: "", FirstName: "", LastName: "", RecentlyViewed: [""])
     
     @IBAction func edit(_ sender: UIBarButtonItem) {
         firstName.isUserInteractionEnabled = !firstName.isUserInteractionEnabled
@@ -102,11 +101,9 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         db.collection("/Users/").document(username).getDocument { (document, error) in
             if let document = document, document.exists{
                 let data = document.data()
-                //                    .map(String.init(describing:)) ?? "nil"
                 do {
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
-//                    self.thisUser = user
                     let url = URL(string: user.ProfilePic)
                     let data = try? Data(contentsOf: url!)
                     let imageImage = UIImage(data: data!)!

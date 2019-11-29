@@ -18,6 +18,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import MessageUI
 
 class BrowseDetails: UIViewController {
     
@@ -96,7 +97,7 @@ class BrowseDetails: UIViewController {
         sellerView.textAlignment = .center
         view.addSubview(sellerView)
         
-        let contactFrame = CGRect(x: view.frame.midX - 180, y: 1000, width: 360, height: 30)
+        let contactFrame = CGRect(x: view.frame.midX - 180, y: 450, width: 360, height: 30)
         let contactView = UIButton(frame: contactFrame)
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         if (username == s){
@@ -118,10 +119,26 @@ class BrowseDetails: UIViewController {
     }
 
     @objc func contact() {
-        let alert = UIAlertController(title: "Success", message: "The seller has been notified via email about your interest in their listing", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
+        //https://www.hackingwithswift.com/example-code/uikit/how-to-send-an-email
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
+            let contactEmail = s + "@wustl.edu"
+            mail.setToRecipients([contactEmail])
+            mail.setMessageBody("<p>Hello! I am interested in the following item:</p><p>" + bt + "</p>", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+//
+//        let alert = UIAlertController(title: "Success", message: "The seller has been notified via email about your interest in their listing", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

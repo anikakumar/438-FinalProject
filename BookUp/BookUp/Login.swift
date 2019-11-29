@@ -82,6 +82,8 @@ class Login: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    //https://stackoverflow.com/questions/48631755/password-reset-swift-4-firebase
     @IBAction func forget(_ sender: UIButton) {
         if username.text == "" {
             let alert = UIAlertController(title: "Email needed", message: "Type in your email above, then click Forgot Password", preferredStyle: .alert)
