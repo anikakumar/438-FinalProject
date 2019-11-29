@@ -43,7 +43,6 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
     @IBOutlet var version: UITextField!
     
     @IBOutlet var comments: UITextField!
-
     var imageURL: URL = URL(string: "www.google.com")!
     
     //help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702
@@ -154,6 +153,7 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
             isbn.text = ""
             version.text = ""
             comments.text = ""
+    
             //need to reload browse
             
         }

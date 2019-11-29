@@ -49,40 +49,42 @@ class BrowseDetails: UIViewController {
         imageView.image = bookpic
         view.addSubview(imageView)
         
-        let authorFrame = CGRect(x: 0, y: 510, width: view.frame.width, height: 30)
+        let authorFrame = CGRect(x: 0, y: 500, width: view.frame.width, height: 30)
         let authorView = UILabel(frame: authorFrame)
         authorView.text = "Author: " + a
         authorView.textAlignment = .center
         view.addSubview(authorView)
         
-        let courseFrame = CGRect(x: 0, y: 540, width: view.frame.width, height: 30)
+        let courseFrame = CGRect(x: 0, y: 530, width: view.frame.width, height: 30)
         let courseView = UILabel(frame: courseFrame)
         courseView.text = "Course: " + course
         courseView.textAlignment = .center
         view.addSubview(courseView)
         
-        let isbnFrame = CGRect(x: 0, y: 570, width: view.frame.width, height: 30)
+        let isbnFrame = CGRect(x: 0, y: 560, width: view.frame.width, height: 30)
         let isbnView = UILabel(frame: isbnFrame)
         isbnView.text = "ISBN: " + isbn
         isbnView.textAlignment = .center
         view.addSubview(isbnView)
         
-        let versionFrame = CGRect(x: 0, y: 600, width: view.frame.width, height: 30)
+        let versionFrame = CGRect(x: 0, y: 590, width: view.frame.width, height: 30)
         let versionView = UILabel(frame: versionFrame)
         versionView.text = "Version: " + v
         versionView.textAlignment = .center
         view.addSubview(versionView)
         
-        let conditionFrame = CGRect(x: 0, y: 630, width: view.frame.width, height: 30)
+        let conditionFrame = CGRect(x: 0, y: 620, width: view.frame.width, height: 30)
         let conditionView = UILabel(frame: conditionFrame)
         conditionView.text = "Condition: " + cond
         conditionView.textAlignment = .center
         view.addSubview(conditionView)
         
-        let commFrame = CGRect(x: 0, y: 660, width: view.frame.width, height: 30)
+        let commFrame = CGRect(x: 0, y: 650, width: view.frame.width, height: 30)
         let commView = UILabel(frame: commFrame)
         commView.text = "Comments: " + comm
         commView.textAlignment = .center
+        commView.numberOfLines = 3
+        commView.adjustsFontSizeToFitWidth = true
         view.addSubview(commView)
         
         let priceFrame = CGRect(x: 0, y: 690, width: view.frame.width, height: 30)
