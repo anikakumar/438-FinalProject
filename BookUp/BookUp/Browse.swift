@@ -115,6 +115,19 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 let data = try? Data(contentsOf: url!)
                 let image = UIImage(data: data!)!
                 detailVC.bookpic = image
+                
+                var idToAppend: String = ""
+                for (bookID, bookObj) in idToBook {
+                    if bookObj == bookResults[indexPath.row] {
+                        idToAppend = bookID
+                    }
+                }
+                let db = Firestore.firestore()
+                let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
+                db.collection("/Users/").document(username).updateData([
+                    "RecentlyViewed" : FieldValue.arrayUnion([idToAppend])
+                ])
+                
             }
         }
     }
@@ -151,7 +164,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
          grabFirebaseDataRecentlyViewed()
          db.collection("/Users/").document(username).updateData([
          "RecentlyViewed" : recents.append(idToAppend)
-         ])/
+         ])
          */
         //        navigationController?.pushViewController(detailVC, animated: true)
         
@@ -180,6 +193,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
                     self.recents = user.RecentlyViewed
+                    print("USER.RECENTLYVIEWED", user.RecentlyViewed)
                     print("set recently viewed")
                 } catch {
                     print ("something went wrong")
@@ -187,6 +201,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
         }
+        
     }
     
     func grabFirebaseData() {

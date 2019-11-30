@@ -29,7 +29,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
         cell.configure(i: image, l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
-        print(recentBooks)
+        //print(recentBooks)
         return cell
         
     }
@@ -65,12 +65,15 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         recent.dataSource = self
         grabFirebaseData()
         self.recent.isHidden = false
-        self.recent.reloadData()
+        //self.recent.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recent.reloadData()
+        recentBooks.removeAll()
+        recents.removeAll()
+        grabFirebaseData()
+        //recent.reloadData()
     }
     
     //books sold
@@ -95,7 +98,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        self.recent.reloadData()
+        
     }
     
     func grabFirebaseDataPosts() {
@@ -111,6 +114,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     let jsonData = try? JSONSerialization.data(withJSONObject:m)
                     do{
                         if self.recents.contains(document.documentID) {
+                            print("DOCUMENT ID", document.documentID)
                             let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                             self.recentBooks.append(haha)
                         }
@@ -120,11 +124,23 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 print("------HISTORY OVER--------")
+               // self.recentBooks.reverse()
+                self.recent.reloadData()
             }
             //            print(self.bookResults)
-            self.recent.reloadData()
         }
     }
+    
+    @objc func reload() {
+        recent.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.grabFirebaseData()
+            DispatchQueue.main.async{
+                self.recent.reloadData()
+            }
+        }
+    }
+    
 //
 //    func grabBookData() {
 //        print("------HISTORY--------")
