@@ -124,7 +124,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 print("------HISTORY OVER--------")
-               // self.recentBooks.reverse()
+                self.recentBooks.reverse()
                 self.recent.reloadData()
             }
             //            print(self.bookResults)
