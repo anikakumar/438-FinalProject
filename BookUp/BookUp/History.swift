@@ -63,7 +63,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         print("entered history view did load")
         recent.delegate = self
         recent.dataSource = self
-        grabFirebaseData()
+        //grabFirebaseData()
         self.recent.isHidden = false
         //self.recent.reloadData()
     }
