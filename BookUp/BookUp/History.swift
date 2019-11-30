@@ -101,6 +101,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
     func grabFirebaseDataPosts() {
         let db = Firestore.firestore()
         db.collection("/Postings/").getDocuments() { (querySnapshot, err) in
@@ -140,6 +141,19 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+
+    @IBAction func clear(_ sender: Any) {
+        let db = Firestore.firestore()
+        let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
+        db.collection("/Users/").document(username).updateData([
+            "RecentlyViewed" : []
+        ])
+        grabFirebaseData()
+        print("history cleared")
+    }
+
+    
     
 //
 //    func grabBookData() {
