@@ -5,16 +5,6 @@
 //  Created by Davari on 11/11/19.
 //  Copyright © 2019 Anika Kumar. All rights reserved.
 
-//image
-//title of book
-//author
-//course
-//condition
-//version/edition
-//description/additional notes
-//contact seller button
-//isbn (maybe)
-
 import Foundation
 import UIKit
 import Firebase
@@ -79,13 +69,19 @@ class BrowseDetails: UIViewController {
     @IBAction func deleteBook(_ sender: UIBarButtonItem) {
         let db = Firestore.firestore()
         db.collection("/Postings/").document(refString).delete()
-        let alert = UIAlertController(title: "Success", message: "The posting has been deleted", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
+        performSegueToReturnBack()
     }
     
-    //https://stackoverflow.com/questions/40887721/sending-an-email-from-swift-3
+    //https://stackoverflow.com/questions/38741556/ios-how-to-simple-return-back-to-previous-presented-pushed-view-controller-progr
+    func performSegueToReturnBack()  {
+        if let nav = self.navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+//https://stackoverflow.com/questions/40887721/sending-an-email-from-swift-3
     func mailComposeController(controller: MFMailComposeViewController,
                                didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         // Check the result or perform other tasks.

@@ -45,51 +45,51 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
     @IBOutlet var comments: UITextField!
     var imageURL: URL = URL(string: "www.google.com")!
     
-    //help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702
-    @IBAction func uploadPhoto(_ sender: Any) {
-        //        let alert = UIAlertController(title: "Ready to upload?", message: nil, preferredStyle: .alert)
-        //        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        //        }))
-        //        alert.addAction(UIAlertAction(title: "No", style: .default, handler:nil))
-        //        self.present(alert, animated: true)
-    }
-    
-    /*help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702           https://stackoverflow.com/questions/51342028/cannot-subscript-a-value-of-type-string-any-with-an-index-of-type-uiimage
-     */
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        guard let selectedImage = info[.originalImage] as? UIImage else {
-            fatalError("\(info)")
-        }
-        self.image1.image = selectedImage
-        self.imageSet = true
-        let storageRef = Storage.storage().reference()
-        let imagesRef = storageRef.child("images")
-        let fileName = String(self.bookTitle.text! + String((Auth.auth().currentUser?.email?.dropLast(10))!)).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
-        let fileRef = imagesRef.child(fileName)
-        fileRef.putData(selectedImage.pngData()!)
-        fileRef.downloadURL{ url, error in
-            if let error = error {
-                print(error)
-            } else {
-                self.imageURL = url!
-            }
-        }
-        self.dismiss(animated: true, completion: nil)
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Uploaded!", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Close", style: .default, handler:nil))
-            self.present(alert, animated :true)
-        }
-        
-    }
+//    //help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702
+//    @IBAction func uploadPhoto(_ sender: Any) {
+//        //        let alert = UIAlertController(title: "Ready to upload?", message: nil, preferredStyle: .alert)
+//        //        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+//            let imagePicker = UIImagePickerController()
+//            imagePicker.delegate = self
+//            imagePicker.allowsEditing = true
+//            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+//            self.present(imagePicker, animated: true, completion: nil)
+//        }
+//        //        }))
+//        //        alert.addAction(UIAlertAction(title: "No", style: .default, handler:nil))
+//        //        self.present(alert, animated: true)
+//    }
+//    
+//    /*help from https://medium.com/@tjcarney89/accessing-camera-and-photo-library-in-swift-3-b3f075ba1702           https://stackoverflow.com/questions/51342028/cannot-subscript-a-value-of-type-string-any-with-an-index-of-type-uiimage
+//     */
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        
+//        guard let selectedImage = info[.originalImage] as? UIImage else {
+//            fatalError("\(info)")
+//        }
+//        self.image1.image = selectedImage
+//        self.imageSet = true
+//        let storageRef = Storage.storage().reference()
+//        let imagesRef = storageRef.child("images")
+//        let fileName = String(self.bookTitle.text! + String((Auth.auth().currentUser?.email?.dropLast(10))!)).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+//        let fileRef = imagesRef.child(fileName)
+//        fileRef.putData(selectedImage.pngData()!)
+//        fileRef.downloadURL{ url, error in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                self.imageURL = url!
+//            }
+//        }
+//        self.dismiss(animated: true, completion: nil)
+//        DispatchQueue.main.async {
+//            let alert = UIAlertController(title: "Uploaded!", message: nil, preferredStyle: .actionSheet)
+//            alert.addAction(UIAlertAction(title: "Close", style: .default, handler:nil))
+//            self.present(alert, animated :true)
+//        }
+//        
+//    }
     
     @IBAction func post(_ sender: Any) {
         if bookTitle.text == ""{
@@ -110,9 +110,6 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
         if isbn.text == ""{
             emptyFields.append("ISBN")
         }
-//        if (!imageSet){
-//            emptyFields.append("Picture")
-//        }
         if (emptyFields.count != 0){
             var message = ""
             for field in emptyFields{
@@ -147,7 +144,6 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
             }))
             self.present(alert, animated: true, completion: nil)
             
-//            self.image1.image = nil
             self.bookTitle.text = ""
             self.course.text = ""
             self.price.text = ""
@@ -160,17 +156,5 @@ class Post: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
             //need to reload browse
         }
     }
-    
-    
-    //submit form
-    //upload image
-    //title of book
-    //author
-    //course
-    //condition
-    //version/edition
-    //description/additional notes
-    //post button
-    //auto grabs seller id
 }
 

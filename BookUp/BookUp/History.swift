@@ -17,6 +17,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var recents: [String] = []
     var recentBooks: [Book] = []
+    var imageCache: [UIImage] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentBooks.count
@@ -25,20 +26,11 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:Cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath) as! Cell
 
-        let url = URL(string: recentBooks[indexPath.row].Picture)
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)!
-        cell.configure(i: image, l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
-        //print(recentBooks)
+        cell.configure(i: imageCache[indexPath.row], l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
         return cell
         
     }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(120)
-    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = BrowseDetails()
         detailVC.bt = recentBooks[indexPath.row].BookTitle
@@ -56,29 +48,22 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         detailVC.bookpic = image
     }
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("entered history view did load")
         recent.delegate = self
         recent.dataSource = self
-        //grabFirebaseData()
         self.recent.isHidden = false
-        //self.recent.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        recentBooks.removeAll()
-        recents.removeAll()
-        grabFirebaseData()
-        //recent.reloadData()
+            super.viewWillAppear(animated)
+            recents = []
+            recentBooks = []
+            imageCache = []
+            grabFirebaseData()
     }
-    
-    //books sold
-    //books listed
-    //contacted by
 
     @IBOutlet weak var recent: UITableView!
     
@@ -98,7 +83,6 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
     }
     
     
@@ -118,6 +102,10 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             print("DOCUMENT ID", document.documentID)
                             let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                             self.recentBooks.append(haha)
+                            let url = URL(string: haha.Picture)
+                            let data = try? Data(contentsOf: url!)
+                            let image = UIImage(data: data!)!
+                            self.imageCache.append(image)
                         }
                     }
                     catch{
@@ -125,23 +113,11 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 print("------HISTORY OVER--------")
-                self.recentBooks.reverse()
-                self.recent.reloadData()
+
             }
-            //            print(self.bookResults)
+            self.recent.reloadData()
         }
     }
-    
-    @objc func reload() {
-        recent.reloadData()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.grabFirebaseData()
-            DispatchQueue.main.async{
-                self.recent.reloadData()
-            }
-        }
-    }
-    
 
     @IBAction func clear(_ sender: Any) {
         let db = Firestore.firestore()
@@ -149,21 +125,10 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         db.collection("/Users/").document(username).updateData([
             "RecentlyViewed" : []
         ])
-        grabFirebaseData()
-        self.recentBooks = []
+        recents = []
+        recentBooks = []
+        imageCache = []
         self.recent.reloadData()
-        print("history cleared")
     }
-
-    
-    
-//
-//    func grabBookData() {
-//        print("------HISTORY--------")
-//        for r in recents {
-//           print(r)
-//        }
-//        print("------HISTORY OVER--------")
-//    }
 }
 

@@ -17,6 +17,7 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     var myPosts: [Book] = []
     var idToBook: [String: Book] = [:]
+    var imageCache: [UIImage] = []
     
     func grabBookData() {
         let db = Firestore.firestore()
@@ -33,6 +34,10 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         if haha.Seller == self.username {
                             self.myPosts.append(haha)
                             self.idToBook[document.documentID] = haha
+                            let url = URL(string: haha.Picture)
+                            let data = try? Data(contentsOf: url!)
+                            let image = UIImage(data: data!)!
+                            self.imageCache.append(image)
                         }
                     }
                     catch{
@@ -51,10 +56,7 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:Cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "myPostings", for: indexPath) as! Cell2
-        let url = URL(string: myPosts[indexPath.row].Picture)
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)!
-        cell.configure(i: image, l: myPosts[indexPath.row].BookTitle)
+        cell.configure(i: imageCache[indexPath.row], l: myPosts[indexPath.row].BookTitle)
         return cell
     }
     
@@ -126,12 +128,12 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         // Do any additional setup after loading the view.
         myBooks.delegate = self
         myBooks.dataSource = self
-//        grabFirebaseData()
-//        grabBookData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        myPosts = []
+        idToBook = [:]
         grabFirebaseData()
         grabBookData()
         myBooks.reloadData()
@@ -157,10 +159,5 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             }
         }
     }
-    
-    //name
-    //email
-    //update button
-    //your listings
 }
 

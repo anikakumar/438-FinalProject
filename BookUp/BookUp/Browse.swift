@@ -13,19 +13,6 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseAuth
 
-//main parts:
-//Search bar
-//how to filter queries by isbn, course, title???
-//UICollectionView or UITableView
-//default is by recently added
-//on click goes to detailed view
-//cache images
-//book titles
-
-//optional:
-//filtered search
-
-
 class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource {
     
     
@@ -35,14 +22,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:Cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
-        let url = URL(string: bookResults[indexPath.row].Picture)
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)!
-        cell.configure(i: image, l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + String(bookResults[indexPath.row].Price), id: indexPath.row)
+        cell.configure(i: imageCache[indexPath.row], l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + String(bookResults[indexPath.row].Price), id: indexPath.row)
         return cell
     }
-    
-    
     
     @IBOutlet var search: UISearchBar!
     
@@ -51,51 +33,55 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     var b: Book!
     var everyBook: [Book] = []
     var idToBook: [String: Book] = [:]
+    var imageCache: [UIImage] = []
+    var allImages: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.grabFirebaseData()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-
+        grabFirebaseData()
         // Do any additional setup after loading the view.
     }
-//
+
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
-//        bookResults.removeAll()
-//        searchBarSearchButtonClicked(search)
+//        print("start display")
+//        everyBook = []
+//        bookResults = []
+//        imageCache = []
+//        allImages = []
+//        grabFirebaseData()
+//        print("displayed")
 //    }
-//
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         bookResults = []
+        imageCache = []
         if (searchBar.text! == ""){
             bookResults = everyBook
+            imageCache = allImages
         } else {
             for book in everyBook {
                 if book.BookTitle.lowercased().contains(searchBar.text!.lowercased()) || book.Author.lowercased().contains(searchBar.text!.lowercased()) || book.Course.lowercased().contains(searchBar.text!.lowercased()){
                     bookResults.append(book)
+                    let url = URL(string: book.Picture)
+                    let data = try? Data(contentsOf: url!)
+                    let image = UIImage(data: data!)!
+                    self.imageCache.append(image)
                 }
             }
         }
-        print(bookResults)
+//        print(bookResults)
         self.tableView.reloadData()
     }
     
     @IBAction func refresh(_ sender: Any) {
-        bookResults.removeAll()
+        everyBook = []
+        bookResults = []
+        imageCache = []
         grabFirebaseData()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(120)
     }
     
     var recents: [String] = []
@@ -112,10 +98,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 detailVC.cond = bookResults[indexPath.row].Condition
                 detailVC.v = bookResults[indexPath.row].Version
                 detailVC.isbn = bookResults[indexPath.row].ISBN
-                let url = URL(string: bookResults[indexPath.row].Picture)
-                let data = try? Data(contentsOf: url!)
-                let image = UIImage(data: data!)!
-                detailVC.bookpic = image
+                detailVC.bookpic = imageCache[indexPath.row]
                 
                 var idToAppend: String = ""
                 for (bookID, bookObj) in idToBook {
@@ -142,8 +125,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
                     self.recents = user.RecentlyViewed
-                    print("USER.RECENTLYVIEWED", user.RecentlyViewed)
-                    print("set recently viewed")
                 } catch {
                     print (error)
                 }
@@ -165,6 +146,10 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                         self.everyBook.append(haha)
                         self.idToBook[document.documentID] = haha
+                        let url = URL(string: haha.Picture)
+                        let data = try? Data(contentsOf: url!)
+                        let image = UIImage(data: data!)!
+                        self.allImages.append(image)
                     }
                     catch{
                         print(error)
@@ -172,21 +157,9 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
             self.bookResults = self.everyBook
+            self.imageCache = self.allImages
             self.tableView.reloadData()
         }
     }
-    
-//    @objc func reload() {
-//        tableView.reloadData()
-//        //let searchText = search.text
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            self.grabFirebaseData()
-//            //self.cacheImages()
-//            DispatchQueue.main.async{
-//                print(self.bookResults.count)
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
 }
 
