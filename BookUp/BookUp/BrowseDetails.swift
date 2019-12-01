@@ -13,7 +13,7 @@ import FirebaseCore
 import FirebaseAuth
 import MessageUI
 
-class BrowseDetails: UIViewController {
+class BrowseDetails: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet var image: UIImageView!
     @IBOutlet weak var authorView: UITextField!
@@ -60,7 +60,7 @@ class BrowseDetails: UIViewController {
         else{
             contactView.setTitle("Interested? Contact seller", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
-
+            
         }
         contactView.setTitleColor(UIColor.red, for: .normal)
     }
@@ -81,27 +81,23 @@ class BrowseDetails: UIViewController {
         }
     }
     
-//https://stackoverflow.com/questions/40887721/sending-an-email-from-swift-3
-    func mailComposeController(controller: MFMailComposeViewController,
-                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        // Check the result or perform other tasks.
-        // Dismiss the mail compose view controller.
-        controller.dismiss(animated: true, completion: nil)
+    func sendEmail() {
+        //https://www.hackingwithswift.com/example-code/uikit/how-to-send-an-email
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            let contactEmail = s + "@wustl.edu"
+            mail.setToRecipients([contactEmail])
+            mail.setMessageBody("<p>Hello! I am interested in the following item:</p><p>" + bt + "</p>", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
     }
     
     @IBAction func contact(_ sender: Any) {
         if contactView.titleLabel?.text == "Interested? Contact seller" {
-            //https://www.hackingwithswift.com/example-code/uikit/how-to-send-an-email
-            if MFMailComposeViewController.canSendMail() {
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-                let contactEmail = s + "@wustl.edu"
-                mail.setToRecipients([contactEmail])
-                mail.setMessageBody("<p>Hello! I am interested in the following item:</p><p>" + bt + "</p>", isHTML: true)
-                present(mail, animated: true)
-            } else {
-                // show failure alert
-            }
+            sendEmail()
         } else {
             print ("edit")
             authorView.isUserInteractionEnabled = !authorView.isUserInteractionEnabled
@@ -153,14 +149,14 @@ class BrowseDetails: UIViewController {
                     priceView.isUserInteractionEnabled = !priceView.isUserInteractionEnabled
                 } else {
                     Firestore.firestore().collection("/Postings/").document(refString).updateData([
-                    "Author": self.authorView.text!,
-                    "Comments": self.commView.text!,
-                    "Condition": self.conditionView.text ?? "",
-                    "Course": self.courseView.text ?? "",
-                    "ISBN": self.isbnView.text!,
-                    "Price": Double(self.priceView.text!)!,
-                    "Version": self.versionView.text!,
-                    ])
+                        "Author": self.authorView.text!,
+                        "Comments": self.commView.text!,
+                        "Condition": self.conditionView.text ?? "",
+                        "Course": self.courseView.text ?? "",
+                        "ISBN": self.isbnView.text!,
+                        "Price": Double(self.priceView.text!)!,
+                        "Version": self.versionView.text!,
+                        ])
                     contactView.setTitle("Edit your listing", for: .normal)
                 }
             }
@@ -169,5 +165,16 @@ class BrowseDetails: UIViewController {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+    }
+}
+
+//https://www.youtube.com/watch?v=J-pn5V2jcfo
+extension ViewController: MFMailComposeViewControllerDelegate{
+    //https://stackoverflow.com/questions/40887721/sending-an-email-from-swift-3
+    private func mailComposeController(controller: MFMailComposeViewController,
+                                       didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        // Check the result or perform other tasks.
+        // Dismiss the mail compose view controller.
+        controller.dismiss(animated: true, completion: nil)
     }
 }
