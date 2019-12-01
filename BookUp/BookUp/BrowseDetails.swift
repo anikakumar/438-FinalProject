@@ -147,6 +147,13 @@ class BrowseDetails: UIViewController {
                         NSLog("The \"OK\" alert occured.")
                     }))
                     self.present(alert, animated: true, completion: nil)
+                    authorView.isUserInteractionEnabled = !authorView.isUserInteractionEnabled
+                    courseView.isUserInteractionEnabled = !courseView.isUserInteractionEnabled
+                    isbnView.isUserInteractionEnabled = !isbnView.isUserInteractionEnabled
+                    versionView.isUserInteractionEnabled = !versionView.isUserInteractionEnabled
+                    conditionView.isUserInteractionEnabled = !conditionView.isUserInteractionEnabled
+                    commView.isUserInteractionEnabled = !commView.isUserInteractionEnabled
+                    priceView.isUserInteractionEnabled = !priceView.isUserInteractionEnabled
                 } else {
                     Firestore.firestore().collection("/Postings/").document(refString).updateData([
                     "Author": self.authorView.text!,
