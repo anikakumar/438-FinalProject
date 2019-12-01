@@ -51,28 +51,29 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     var b: Book!
     var everyBook: [Book] = []
     var idToBook: [String: Book] = [:]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         search.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        grabFirebaseData()
-//        self.tableView.isHidden = false
-//        self.tableView.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.grabFirebaseData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
         // Do any additional setup after loading the view.
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        bookResults.removeAll()
-        searchBarSearchButtonClicked(search)
-    }
-    
-    //    func searchBar(_ search: UISearchBar, textDidChange searchText: String) {
-    //        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
-    //        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
-    //    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        bookResults.removeAll()
+//        searchBarSearchButtonClicked(search)
+//    }
+//
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         bookResults = []
         if (searchBar.text! == ""){
@@ -90,7 +91,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     
     @IBAction func refresh(_ sender: Any) {
         bookResults.removeAll()
-        searchBarSearchButtonClicked(search)
+        grabFirebaseData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -128,7 +129,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 db.collection("/Users/").document(username).updateData([
                     "RecentlyViewed" : FieldValue.arrayUnion([idToAppend])
                 ])
-                
             }
         }
     }
@@ -138,7 +138,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         Firestore.firestore().collection("/Users/").document(username).getDocument { (document, error) in
             if let document = document, document.exists{
                 let data = document.data()
-                //                    .map(String.init(describing:)) ?? "nil"
                 do {
                     let jsonData = try? JSONSerialization.data(withJSONObject: data!)
                     let user = try JSONDecoder().decode(User.self, from: jsonData!)
@@ -177,17 +176,17 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         }
     }
     
-    @objc func reload() {
-        tableView.reloadData()
-        //let searchText = search.text
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.grabFirebaseData()
-            //self.cacheImages()
-            DispatchQueue.main.async{
-                print(self.bookResults.count)
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    @objc func reload() {
+//        tableView.reloadData()
+//        //let searchText = search.text
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.grabFirebaseData()
+//            //self.cacheImages()
+//            DispatchQueue.main.async{
+//                print(self.bookResults.count)
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
 }
 

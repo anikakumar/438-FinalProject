@@ -60,7 +60,7 @@ class BrowseDetails: UIViewController {
         versionView.text = v
         conditionView.text = cond
         commView.text = comm
-        priceView.text = "$" + p
+        priceView.text = p
         sellerView.text = s
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         if (username == s){
@@ -79,7 +79,10 @@ class BrowseDetails: UIViewController {
     @IBAction func deleteBook(_ sender: UIBarButtonItem) {
         let db = Firestore.firestore()
         db.collection("/Postings/").document(refString).delete()
-        
+        let alert = UIAlertController(title: "Success", message: "The posting has been deleted", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
     }
     
     
@@ -115,17 +118,48 @@ class BrowseDetails: UIViewController {
                 contactView.setTitle("Save changes", for: .normal)
             }
             else {
-                contactView.setTitle("Edit your listing", for: .normal)
-//                contactView.titleLabel?.text = "Edit your listing"
+                var emptyFields: [String] = []
+                if courseView.text == ""{
+                    emptyFields.append("Course")
+                }
+                if priceView.text == ""{
+                    emptyFields.append("Price")
+                }
+                if authorView.text == ""{
+                    emptyFields.append("Author")
+                }
+                if conditionView.text == ""{
+                    emptyFields.append("Condition")
+                }
+                if isbnView.text == ""{
+                    emptyFields.append("ISBN")
+                }
+                if (emptyFields.count != 0){
+                    var message = ""
+                    for field in emptyFields{
+                        message = message + field + ", "
+                    }
+                    let index = message.index(message.endIndex, offsetBy: -2)
+                    let message2 = String(message.prefix(upTo: index))
+                    emptyFields = []
+                    let alert = UIAlertController(title: "Empty Fields!", message: message2, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    Firestore.firestore().collection("/Postings/").document(refString).updateData([
+                    "Author": self.authorView.text!,
+                    "Comments": self.commView.text!,
+                    "Condition": self.conditionView.text ?? "",
+                    "Course": self.courseView.text ?? "",
+                    "ISBN": self.isbnView.text!,
+                    "Price": Double(self.priceView.text!)!,
+                    "Version": self.versionView.text!,
+                    ])
+                    contactView.setTitle("Edit your listing", for: .normal)
+                }
             }
-////            contactView.titleLabel?.text = (priceView.isUserInteractionEnabled) ? "Save changes" : "Edit your listing"
-//            if contactView.titleLabel?.text == "Edit your listing" {
-//                print("write to database")
-////                db.collection("/Users/").document(username).updateData([
-////                    "FirstName" : firstName.text!,
-////                    "LastName" : lastName.text!
-////                    ])
-//            }
         }
     }
     

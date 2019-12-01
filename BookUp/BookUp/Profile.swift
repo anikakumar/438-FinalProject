@@ -16,6 +16,7 @@ import FirebaseCore
 class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var myPosts: [Book] = []
+    var idToBook: [String: Book] = [:]
     
     func grabBookData() {
         let db = Firestore.firestore()
@@ -31,6 +32,7 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         let haha = try JSONDecoder().decode(Book.self, from: jsonData!)
                         if haha.Seller == self.username {
                             self.myPosts.append(haha)
+                            self.idToBook[document.documentID] = haha
                         }
                     }
                     catch{
@@ -74,6 +76,13 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let data = try? Data(contentsOf: url!)
             let image = UIImage(data: data!)!
             detailVC.bookpic = image
+            var idToAppend: String = ""
+            for (bookID, bookObj) in idToBook {
+                if bookObj == myPosts[indexPath.row] {
+                    idToAppend = bookID
+                    detailVC.refString = idToAppend
+                }
+            }
         }
     }
     
@@ -117,12 +126,14 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         // Do any additional setup after loading the view.
         myBooks.delegate = self
         myBooks.dataSource = self
-        grabFirebaseData()
-        grabBookData()
+//        grabFirebaseData()
+//        grabBookData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        grabFirebaseData()
+        grabBookData()
         myBooks.reloadData()
     }
     
