@@ -49,15 +49,33 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:Cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "myPostings", for: indexPath) as! Cell2
-        //cell.backgroundColor = UIColor.black
         let url = URL(string: myPosts[indexPath.row].Picture)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)!
-        print(myPosts[indexPath.row].BookTitle)
         cell.configure(i: image, l: myPosts[indexPath.row].BookTitle)
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let iPath = self.myBooks.indexPathsForSelectedItems
+        let indexPath : IndexPath = iPath![0] as IndexPath
+        if segue.identifier == "postedDetail" {
+            let detailVC = segue.destination as! BrowseDetails
+            detailVC.bt = myPosts[indexPath.row].BookTitle
+            detailVC.a = myPosts[indexPath.row].Author
+            detailVC.s = myPosts[indexPath.row].Seller
+            detailVC.p = String(myPosts[indexPath.row].Price)
+            detailVC.course = myPosts[indexPath.row].Course
+            detailVC.comm = myPosts[indexPath.row].Comments
+            detailVC.cond = myPosts[indexPath.row].Condition
+            detailVC.v = myPosts[indexPath.row].Version
+            detailVC.isbn = myPosts[indexPath.row].ISBN
+            let url = URL(string: myPosts[indexPath.row].Picture)
+            let data = try? Data(contentsOf: url!)
+            let image = UIImage(data: data!)!
+            detailVC.bookpic = image
+        }
+    }
     
     @IBOutlet var myBooks: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -123,7 +141,7 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                     self.email.text = "Email: " +  user.Email
                     self.image.image = imageImage
                 } catch {
-                    print ("something went wrong")
+                    print (error)
                 }
             }
         }

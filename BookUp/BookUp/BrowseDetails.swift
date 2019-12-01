@@ -17,6 +17,9 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseCore
 import FirebaseAuth
 import MessageUI
 
@@ -33,6 +36,7 @@ class BrowseDetails: UIViewController {
     @IBOutlet weak var commView: UITextView!
     @IBOutlet weak var contactView: UIButton!
     
+    var refString: String = ""
     var bt: String = ""
     var a: String = ""
     var course: String = ""
@@ -61,21 +65,22 @@ class BrowseDetails: UIViewController {
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         if (username == s){
             contactView.setTitle("Edit your listing", for: .normal)
-//            contactView.layer.borderWidth = 0
+            deleteDisplay.isEnabled = true
         }
         else{
             contactView.setTitle("Interested? Contact seller", for: .normal)
-//            contactView.layer.borderWidth = 1
+            self.navigationItem.rightBarButtonItem = nil
+
         }
         contactView.setTitleColor(UIColor.red, for: .normal)
-        
-//        contactView.layer.cornerRadius = 8
-        //https://stackoverflow.com/questions/27371194/set-action-listener-programmatically-in-swift
-        //        if (username != s){
-        //            contactView.addTarget(self, action: #selector(contact), for: .touchUpInside)
-        //        }
     }
     
+    @IBOutlet weak var deleteDisplay: UIBarButtonItem!
+    @IBAction func deleteBook(_ sender: UIBarButtonItem) {
+        let db = Firestore.firestore()
+        db.collection("/Postings/").document(refString).delete()
+        
+    }
     
     
     @IBAction func contact(_ sender: Any) {
@@ -87,7 +92,7 @@ class BrowseDetails: UIViewController {
                 let contactEmail = s + "@wustl.edu"
                 mail.setToRecipients([contactEmail])
                 mail.setMessageBody("<p>Hello! I am interested in the following item:</p><p>" + bt + "</p>", isHTML: true)
-                present(mail, animated: true)
+//                present(mail, animated: true)
                 
                 let alert = UIAlertController(title: "Success", message: "The seller has been notified via email about your interest in their listing", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in

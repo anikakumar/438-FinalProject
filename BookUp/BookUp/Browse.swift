@@ -120,6 +120,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 for (bookID, bookObj) in idToBook {
                     if bookObj == bookResults[indexPath.row] {
                         idToAppend = bookID
+                        detailVC.refString = idToAppend
                     }
                 }
                 let db = Firestore.firestore()
@@ -131,58 +132,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
-        
-        //        let detailVC = BrowseDetails()
-        //        detailVC.bt = bookResults[indexPath.row].BookTitle
-        //        detailVC.a = bookResults[indexPath.row].Author
-        //        detailVC.s = bookResults[indexPath.row].Seller
-        //        detailVC.p = String(bookResults[indexPath.row].Price)
-        //        detailVC.course = bookResults[indexPath.row].Course
-        //        detailVC.comm = bookResults[indexPath.row].Comments
-        //        detailVC.cond = bookResults[indexPath.row].Condition
-        //        detailVC.v = bookResults[indexPath.row].Version
-        //        detailVC.isbn = bookResults[indexPath.row].ISBN
-        //        let url = URL(string: bookResults[indexPath.row].Picture)
-        //        let data = try? Data(contentsOf: url!)
-        //        let image = UIImage(data: data!)!
-        //        detailVC.bookpic = image
-        //
-        //        var idToAppend: String = ""
-        //        for (bookID, bookObj) in idToBook {
-        //            if bookObj == bookResults[indexPath.row] {
-        //                idToAppend = bookID
-        //            }
-        //        }
-        /*
-         let db = Firestore.firestore()
-         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
-         grabFirebaseDataRecentlyViewed()
-         db.collection("/Users/").document(username).updateData([
-         "RecentlyViewed" : recents.append(idToAppend)
-         ])
-         */
-        //        navigationController?.pushViewController(detailVC, animated: true)
-        
-    }
-    
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     
-     if(segue.identifier == "myBook") {
-     guard let indexPath = sender as? IndexPath else { return }
-     let detailVC = segue.destination as? BrowseDetails
-     //detailVC?.name.text = bookResults[indexPath.row].BookTitle
-     detailVC?.book = bookResults[indexPath.row] as Book
-     //detailVC?.image = imageCache[indexPath.row] as UIImage
-     }
-     }*/
-    
+
     func grabFirebaseDataRecentlyViewed(){
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         Firestore.firestore().collection("/Users/").document(username).getDocument { (document, error) in
@@ -196,12 +146,10 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                     print("USER.RECENTLYVIEWED", user.RecentlyViewed)
                     print("set recently viewed")
                 } catch {
-                    print ("something went wrong")
-                    
+                    print (error)
                 }
             }
         }
-        
     }
     
     func grabFirebaseData() {
@@ -225,7 +173,6 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
                 }
             }
             self.bookResults = self.everyBook
-            //            print(self.bookResults)
             self.tableView.reloadData()
         }
     }

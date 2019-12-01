@@ -94,7 +94,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.recents = user.RecentlyViewed
                     self.grabFirebaseDataPosts()
                 } catch {
-                    print ("something went wrong")
+                    print (error)
                 }
             }
         }
@@ -150,6 +150,8 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
             "RecentlyViewed" : []
         ])
         grabFirebaseData()
+        self.recentBooks = []
+        self.recent.reloadData()
         print("history cleared")
     }
 
