@@ -85,6 +85,13 @@ class BrowseDetails: UIViewController {
         }))
     }
     
+    //https://stackoverflow.com/questions/40887721/sending-an-email-from-swift-3
+    func mailComposeController(controller: MFMailComposeViewController,
+                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        // Check the result or perform other tasks.
+        // Dismiss the mail compose view controller.
+        controller.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func contact(_ sender: Any) {
         if contactView.titleLabel?.text == "Interested? Contact seller" {
@@ -95,13 +102,7 @@ class BrowseDetails: UIViewController {
                 let contactEmail = s + "@wustl.edu"
                 mail.setToRecipients([contactEmail])
                 mail.setMessageBody("<p>Hello! I am interested in the following item:</p><p>" + bt + "</p>", isHTML: true)
-//                present(mail, animated: true)
-                
-                let alert = UIAlertController(title: "Success", message: "The seller has been notified via email about your interest in their listing", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                present(mail, animated: true)
             } else {
                 // show failure alert
             }
