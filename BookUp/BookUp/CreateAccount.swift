@@ -51,12 +51,25 @@ class CreateAccount: UIViewController {
                                 ])
                             self.loadHomeScreen()
                         } else {
-                            let alert = UIAlertController(title: "Failure to Create Account", message: "Email is already associated with an account", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                            if password.count >= 6 {
+                                let alert = UIAlertController(title: "Failure to Create Account", message: "Email is already associated with an account", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                                 NSLog("The \"OK\" alert occured.")
-                            }))
-                            self.present(alert, animated: true, completion: nil)
-                            self.username.text = ""
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                                self.username.text = ""
+                                self.password.text = ""
+                                self.verify.text = ""
+                            }
+                            else {
+                                let alert = UIAlertController(title: "Failure to Create Account", message: "Password must be 6 or more characters", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                                    NSLog("The \"OK\" alert occured.")
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                                self.password.text = ""
+                                self.verify.text = ""
+                            }
                         }
                     }
                 }
