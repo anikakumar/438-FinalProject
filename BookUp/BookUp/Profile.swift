@@ -15,6 +15,7 @@ import FirebaseCore
 
 class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var listingsLabel: UILabel!
     var myPosts: [Book] = []
     var idToBook: [String: Book] = [:]
     var imageCache: [UIImage] = []
@@ -44,6 +45,10 @@ class Profile: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         print(error)
                     }
                 }
+            }
+            if (self.myPosts == []){
+                self.listingsLabel.text = "You have no listings yet. Go to the sell tab to post a listing!"
+                self.listingsLabel.adjustsFontSizeToFitWidth = true
             }
             print(self.myPosts.count)
             self.myBooks.reloadData()

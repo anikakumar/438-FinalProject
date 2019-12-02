@@ -23,6 +23,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:Cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
+        print(cell)
         cell.configure(i: imageCache[indexPath.row], l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + String(bookResults[indexPath.row].Price), id: indexPath.row)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.label1.adjustsFontSizeToFitWidth = true
@@ -89,6 +90,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         everyBook = []
         bookResults = []
         imageCache = []
+        allImages = []
         grabFirebaseData()
     }
     
