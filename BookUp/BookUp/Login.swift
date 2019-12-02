@@ -21,6 +21,9 @@ class Login: UIViewController {
        
         // Do any additional setup after loading the view.
          loginBtn.layer.cornerRadius = 15
+        loginBtn.setTitleColor(UIColor.black, for: .highlighted)
+        
+
        
     }
     
@@ -31,7 +34,7 @@ class Login: UIViewController {
    
     @IBOutlet weak var loginBtn: UIButton!
    
-    
+   
    
     //https://www.iosapptemplates.com/blog/swift-programming/firebase-swift-tutorial-login-registration-ios
     //https://www.appcoda.com/firebase-login-signup/

@@ -26,6 +26,8 @@ class BrowseDetails: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var commView: UITextView!
     @IBOutlet weak var contactView: UIButton!
     
+
+    
     var refString: String = ""
     var bt: String = ""
     var a: String = ""
@@ -52,6 +54,16 @@ class BrowseDetails: UIViewController, MFMailComposeViewControllerDelegate {
         commView.text = comm
         priceView.text = p
         sellerView.text = s
+        
+        authorView.adjustsFontSizeToFitWidth = true
+        courseView.adjustsFontSizeToFitWidth = true
+        isbnView.adjustsFontSizeToFitWidth = true
+        versionView.adjustsFontSizeToFitWidth = true
+        conditionView.adjustsFontSizeToFitWidth = true
+        priceView.adjustsFontSizeToFitWidth = true
+        sellerView.adjustsFontSizeToFitWidth = true
+        commView.adjustsFontForContentSizeCategory = true
+        
         let username = String((Auth.auth().currentUser?.email?.dropLast(10))!)
         if (username == s){
             contactView.setTitle("Edit your listing", for: .normal)

@@ -27,6 +27,7 @@ class History: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell:Cell = self.recent.dequeueReusableCell(withIdentifier: "recentlyViewed", for: indexPath) as! Cell
 
         cell.configure(i: imageCache[indexPath.row], l1: recentBooks[indexPath.row].BookTitle, l2: recentBooks[indexPath.row].Course , l3: "$" + String(recentBooks[indexPath.row].Price), id: indexPath.row)
+         cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
         
     }

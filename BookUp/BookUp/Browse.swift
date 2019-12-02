@@ -15,6 +15,7 @@ import FirebaseAuth
 
 class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource {
     
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookResults.count
@@ -23,6 +24,12 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:Cell = self.tableView.dequeueReusableCell(withIdentifier: "myBook", for: indexPath) as! Cell
         cell.configure(i: imageCache[indexPath.row], l1: bookResults[indexPath.row].BookTitle, l2: bookResults[indexPath.row].Course , l3: "$" + String(bookResults[indexPath.row].Price), id: indexPath.row)
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.label1.adjustsFontSizeToFitWidth = true
+        cell.label2.adjustsFontSizeToFitWidth = true
+        cell.label3.adjustsFontSizeToFitWidth = true
+        
+      
         return cell
     }
     
@@ -41,6 +48,7 @@ class Browse: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISear
         search.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        
         grabFirebaseData()
         // Do any additional setup after loading the view.
     }
